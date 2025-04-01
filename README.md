@@ -1,5 +1,5 @@
-# English-Word-Python-Project-appweb
-파이썬 프로젝트 영어 단어장 웹앱<br>
+# English-Word-Python-Project-app
+파이썬 프로젝트 영어 단어장 앱<br>
 
 <br><br><br>
 
