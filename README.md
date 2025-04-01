@@ -1,6 +1,6 @@
 # English-Word-Python-Project-appweb
 파이썬 프로젝트 영어 단어장 웹앱<br>
-Python Flask 활용 - 입력 후 빠른 암기 단어장
+
 <br><br><br>
 
 ## 💻 프로젝트 소개 
@@ -9,7 +9,7 @@ Python Flask 활용 - 입력 후 빠른 암기 단어장
 <br> 
 
 ## ✏개발 기간
-2025.03.xx() - 2025.06.xx()(맞게 변경)
+2025.03.28 - 2025.06.xx()(맞게 변경)
 <br><br><br>
 
 ## 👥멤버 구성
@@ -18,10 +18,11 @@ Python Flask 활용 - 입력 후 빠른 암기 단어장
 <br> 
 
 ## ⚙개발환경
-- `python 3.6.` 
+- `python 3.6.`
+- `dart`
 - `html`,`css`, `javaScript`
--  **Database** :`mongo DB`
--  **framework** : `python Flask`
+-  **Database** :`My SQL`
+-  **framework** : `flutter`
 <br> 
 
 ## ⭐주요 기능
