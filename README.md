@@ -1,5 +1,5 @@
 # English-Word-Python-Project-app
-파이썬 프로젝트 영어 단어장 앱 - smarty<br> 
+파이썬 프로젝트 영어 단어장 앱 - Shorty!<br> 
 
 <br><br><br>
 
