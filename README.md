@@ -18,7 +18,7 @@
 <br> 
 
 ## ⚙개발환경
--  **Database** :`My SQL`
+-  **Database** :`MongoDB`
 -  **framework** : `pyQt6`
 <br> 
 
