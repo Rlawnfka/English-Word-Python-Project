@@ -1,11 +1,11 @@
-# English-Word-Python-Project-app
-파이썬 프로젝트 영어 단어장 앱 - Shorty!<br> 
+# English-Word-PyQt6-python-gui
+파이썬 프로젝트 영어 단어장 - Shorty!<br> 
 
-<br><br><br>
+<br><br>
 
 ## 💻 프로젝트 소개 
 - pyQt6
-- 사용자 입력/복습을 통한 집중암기
+- 사용자 입력/복습을 통한 집중암기 GUI 프로그램
 <br> 
 
 ## ✏개발 기간
