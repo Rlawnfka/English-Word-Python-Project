@@ -1,3 +1,5 @@
+# 딕셔너리 형태
+
 text = {
     "primary" : "1F2937",
     "secondary" : "6B7280",
@@ -18,5 +20,6 @@ background = {
     "card-hover" : "D9D9D9",
 }
 
+# 사용법
 print(color["primary"])
 print(background["main"])
