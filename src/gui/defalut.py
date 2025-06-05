@@ -1,4 +1,5 @@
 import sys
+import colors as color # 색상파일 import
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -38,6 +39,7 @@ class defalut(QMainWindow):
 
     def initUI(self):
         # 기본 세팅, 움직임
+        self.setStyleSheet(f"background-color:{color.background['main']}") # 배경색 입히기 f-string (문자열 포맷팅)
         # 전에 열렸던 자리 기억
         pass
 
