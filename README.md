@@ -1,5 +1,5 @@
-# English-Word-PyQt6-python-gui
-파이썬 프로젝트 영어 단어장 - Shorty!<br> 
+# Wordbook-PyQt6-python-gui
+파이썬 프로젝트 단어장 - Shorty!<br> 
 
 <br><br>
 
