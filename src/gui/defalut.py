@@ -21,5 +21,26 @@ class CreateLogo(QWidget):
             font-style: normal;
             font-variation-settings: "XROT" 0,"YROT" 0;
           """)
+        
+class CreateNav(QWidget):
+    def __init__(self):
+        super().__init__()
+        iconHome = QIcon("/assets/icons/iconHome.png")
+        iconAdd = QIcon("/assets/icons/iconAdd.png")
+        iconSetting = QIcon("/assets/icons/iconSetting.png")
+        iconProfile = QIcon("/assets/icons/iconProfile.png")
+
+
+class defalut(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        # 기본 세팅, 움직임
+        # 전에 열렸던 자리 기억
+        pass
+
+
 
 
