@@ -40,6 +40,8 @@ class defalut(QMainWindow):
     def initUI(self):
         # 기본 세팅, 움직임
         self.setStyleSheet(f"background-color:{color.background['main']}") # 배경색 입히기 f-string (문자열 포맷팅)
+        self.setWindowTitle('Shorty!') # 타이틀 설정
+        self.setGeometry(550,30,450,786) # Gui창 위치, 크기
         # 전에 열렸던 자리 기억
         pass
 
