@@ -42,9 +42,17 @@ class setCategories(QWidget):
 class setQuizBox(QWidget):
      def __init__(self):
           super().__init__()
-          self.initUI()
+          layout = QVBoxLayout()
+          self.setLayout(layout)
 
-     def initUI(self):
-          quizTitle = QLabel("깜짝 퀴즈 ✅") # 이모티콘 미지원시 아이콘 이미지로 대체
-          quizTitle.setFont(QFont("Do Hyeon", 25, QFont.Weight.reqular))
+          word = "temporal"
+          wordLayout = QLayout(word)
+          # wordLayout.setStyleSheet()
+
+          self.setStyleSheet("""
+               background-color: color['secondary'];
+               border-radius: 20px;          
+          """)
+
+
 

@@ -1,5 +1,4 @@
-import sys
-import colors as color # 색상파일 import
+from defalut_setting.colors import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -26,22 +25,56 @@ class CreateLogo(QWidget):
 class CreateNav(QWidget):
     def __init__(self):
         super().__init__()
-        iconHome = QIcon("/assets/icons/iconHome.png")
-        iconAdd = QIcon("/assets/icons/iconAdd.png")
-        iconSetting = QIcon("/assets/icons/iconSetting.png")
-        iconProfile = QIcon("/assets/icons/iconProfile.png")
+        iconHome = QIcon("/assets/icons/iconHome.svg")
+        iconAdd = QIcon("/assets/icons/iconAdd.svg")
+        iconSetting = QIcon("/assets/icons/iconSetting.svg")
+        iconProfile = QIcon("/assets/icons/iconProfile.svg")
+
+        iconList = [iconHome, iconAdd, iconSetting, iconProfile]
+
+        for i in iconList:
+            button = QPushButton()
+            button.setIcon(iconList[i])
+            button.setIconSize(QSize(35,35))
+            button.setFlat(True) # 입체감 없애!!!!!!!!!
+            button.setCheckable(True) # 클릭 상태 유지  isCheched()로 확인 후 hover먹이기
+            button.setStyleSheet("""
+                                QPushButton{
+                                 color: TEXT['primary']
+                                 background-color : transparent;
+                                }
+                                QPushButton::hover{
+                                    color: COLOR['hover']
+                                }
+            """)
+            layout.addWidget(button)
+
+        layout = QHBoxLayout()
 
 
-class defalut(QMainWindow):
+
+# 모든 페이지에 나오는 logo, nav 레이아웃 & 
+# 페이지 기본 레이아웃 설정~``
+class defalut(QWidget):
     def __init__(self):
         super().__init__()
+        self.HEIGHT = 900
+        self.WIDTH = 550
+
         self.initUI()
 
     def initUI(self):
         # 기본 세팅, 움직임
-        self.setStyleSheet(f"background-color:{color.background['main']}") # 배경색 입히기 f-string (문자열 포맷팅)
+        self.setStyleSheet("""
+                           background-color:{BACKGROUND['main']};
+                           
+                           """)
         # 전에 열렸던 자리 기억
-        pass
+        
+        self.setWindowTitle("Shorty!")
+        self.setFixedSize(self.WIDTH, self.HEIGHT)
+        
+        layout = QVBoxLayout()
 
 
 
