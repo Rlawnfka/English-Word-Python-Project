@@ -15,7 +15,3 @@ BACKGROUND = {
     "card" : "#FFFFFF",
     "card-hover" : "#D9D9D9",
 }
-
-# 사용법
-print(COLOR["primary"])
-print(BACKGROUND["main"])
