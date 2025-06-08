@@ -1,32 +1,20 @@
-import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-from gui.DefalutLayout import DefalutLayout
+from gui.DefaultLayout import DefaultLayout
 
 ### NOTICE! : select title
 
-class page02(DefalutLayout):
+class page02(DefaultLayout):
      def __init__(self):
           super().__init__()
-          self.initUI()
 
-     def initUI():
-          pass
-
-
-class setBarList(QWidget):
+class createShowInfo:
      def __init__(self):
           super().__init__()
-          self.initUI()
-     
-     def initUI(self):
-          # for 데이터
-          wordTitle = None
-          wordDate = None
-          wordLanguage = None
-          
+
+          # layout
      
 
      

@@ -23,3 +23,5 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
+
+# 여기서 위젯 관리 

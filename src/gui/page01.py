@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-from gui.DefaultLayout import DefaultLayout
+from DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
 ### NOTICE! : home, main page
@@ -25,7 +25,7 @@ class setTopSentanse(QWidget):
           # 랜덤으로 바뀜
           temp = "안녕하세요! Shorty입니다 😊\n단어, 짧은 복습 어떠신가요?"
           sentanse = QLabel(temp)
-          sentanse.setFont(QFont("Do Hyeon", 25, QFont.Weight.regular))
+          sentanse.setFont(QFont("Do Hyeon", 25, QFont.Weight.Normal))
 
           layout = QVBoxLayout()
           layout.addWidget(sentanse)
@@ -103,12 +103,12 @@ class setQuizBox(QWidget):
 
           quizTitle = QLabel("복습 퀴즈 ✅")
           quizTitle.setStyleSheet("font-size: 17px;")
-          quizTitle.setFont(QFont("Do Hyeon", 25, QFont.Weight.regular))
+          quizTitle.setFont(QFont("Do Hyeon", 25, QFont.Weight.Normal))
           
           # DB에서 랜덤으로 뽑아오기
           currentWord = "temporal"
           word = QLabel(currentWord)
-          word.setFont(QFont("Pretandard", 25, QFont.Weight.SemiBold))
+          word.setFont(QFont("Pretandard", 25, QFont.Weight.DemiBold))
           layout.addWidget(word)
 
           selectlength = 3 # 선지가 3개

@@ -4,8 +4,8 @@ from PyQt6.QtCore import *
 
 from gui.DefaultLayout import DefaultLayout
 
-### NOTICE! : wordList 상세 페이지 & word 복습
+### NOTICE! : mypage, review profile
 
-class page03(DefaultLayout):
+class page06(DefaultLayout):
      def __init__(self):
           super().__init__()

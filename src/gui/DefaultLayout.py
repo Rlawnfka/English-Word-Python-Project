@@ -10,7 +10,7 @@ class CreateLogo(QWidget):
         logo = QLabel("Shorty!", self)
         logo.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
-        font = QFont("Tilt Warp",32,QFont.Weight.regular)
+        font = QFont("Tilt Warp",32,QFont.Weight.Normal)
         logo.setFont(font)
 
         logo.setStyleSheet("""
@@ -52,8 +52,6 @@ class CreateNav(QWidget):
 
         
 
-# 모든 페이지에 나오는 logo, nav 레이아웃 & 
-# 페이지 기본 레이아웃 설정~``
 class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
