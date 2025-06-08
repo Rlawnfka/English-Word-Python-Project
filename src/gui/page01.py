@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-from DefaultLayout import DefaultLayout
+from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
 ### NOTICE! : home, main page
@@ -113,7 +113,7 @@ class setQuizBox(QWidget):
 
           selectlength = 3 # 선지가 3개
           for i in range(1, selectlength+1):
-               layout.addWidget(self.createChoice(i, str("임시"+i)))
+               layout.addWidget(self.createChoice(i, "임시"+str(i)))
           
           self.setStyleSheet(f"background-color: {COLOR['secondary']}; border-radius:20px;")
           self.setLayout(layout)
