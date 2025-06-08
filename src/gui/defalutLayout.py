@@ -16,11 +16,8 @@ class CreateLogo(QWidget):
         logo.setStyleSheet("""
             color: #000000;
             font-size : 32px;
-            font-family: "Tilt Warp", sans-serif;
-            font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
-            font-variation-settings: "XROT" 0,"YROT" 0;
           """)
         
 class CreateNav(QWidget):
@@ -41,14 +38,14 @@ class CreateNav(QWidget):
             button.setIconSize(QSize(35,35))
             button.setFlat(True) # 입체감
             button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
-            button.setStyleSheet("""
-                                QPushButton{
-                                 color: TEXT['primary']
-                                 background-color : transparent;
-                                }
-                                QPushButton::hover{
-                                    color: COLOR['hover']
-                                }
+            button.setStyleSheet(f"""
+                QPushButton{{
+                    color: {TEXT['primary']};
+                    background-color : transparent;
+                }}
+                QPushButton:hover{{
+                    color: {COLOR['hover']};
+                }}
             """)
             layout.addWidget(button)
 
@@ -62,14 +59,9 @@ class defalutLayout(QWidget):
         super().__init__()
         self.HEIGHT = 900
         self.WIDTH = 550
-        self.initUI()
-
-    def initUI(self):
+        
         # 기본 세팅, 움직임
-        self.setStyleSheet("""
-                           background-color: BACKGROUND['main'];
-                           
-                           """)
+        self.setStyleSheet(f"background-color: {BACKGROUND['main']};")
         # 전에 열렸던 자리 기억
         
         self.setWindowTitle("Shorty!")
