@@ -1,8 +1,41 @@
-from defalut_setting.colors import *
+import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
+from defalut_setting.colors import *
+
+
+class DefaultLayout(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.HEIGHT = 900
+        self.WIDTH = 550
+        
+        # 기본 세팅, 움직임
+        self.setStyleSheet(f"""
+            *{{
+                background-color: {BACKGROUND['main']};
+            }}
+        """)
+        # 전에 열렸던 자리 기억
+        
+        self.setWindowTitle("Shorty!")
+        self.setFixedSize(self.WIDTH, self.HEIGHT)
+        
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+
+        # 상단에 LOGO 고정하긔..
+        self.layout.addWidget(CreateLogo())
+
+        # 중간 
+        self.contentLayout = QVBoxLayout()
+        self.layout.addLayout(self.contentLayout)
+
+        # 하단 nav 고정
+        self.layout.addWidget(CreateNav())
+        
 
 class CreateLogo(QWidget):
     def __init__(self):
@@ -51,29 +84,3 @@ class CreateNav(QWidget):
             layout.addWidget(button)
 
         
-
-class DefaultLayout(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.HEIGHT = 900
-        self.WIDTH = 550
-        
-        # 기본 세팅, 움직임
-        self.setStyleSheet(f"background-color: {BACKGROUND['main']};")
-        # 전에 열렸던 자리 기억
-        
-        self.setWindowTitle("Shorty!")
-        self.setFixedSize(self.WIDTH, self.HEIGHT)
-        
-        self.layout = QVBoxLayout()
-        self.setLayout(self.layout)
-
-        # 상단에 LOGO 고정하긔..
-        self.layout.addWidget(CreateLogo())
-
-        # 중간 
-        self.contentLayout = QVBoxLayout()
-        self.layout.addLayout(self.contentLayout)
-
-        # 하단 nav 고정
-        self.layout.addWidget(CreateNav())
