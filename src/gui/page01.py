@@ -1,14 +1,13 @@
-import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-from gui.DefalutLayout import DefalutLayout
+from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
 ### NOTICE! : home, main page
 
-class page01(DefalutLayout):
+class page01(DefaultLayout):
      def __init__(self):
           super().__init__()
 
@@ -109,7 +108,7 @@ class setQuizBox(QWidget):
           # DB에서 랜덤으로 뽑아오기
           currentWord = "temporal"
           word = QLabel(currentWord)
-          word.setfont(QFont("Pretandard", 25, QFont.Weight.SemiBold))
+          word.setFont(QFont("Pretandard", 25, QFont.Weight.SemiBold))
           layout.addWidget(word)
 
           selectlength = 3 # 선지가 3개

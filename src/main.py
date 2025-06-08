@@ -18,6 +18,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(page01())
 
 if __name__ == "__main__":
+    # 진입
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
