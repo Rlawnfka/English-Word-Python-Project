@@ -3,38 +3,38 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-import defalut
+from gui.DefalutLayout import DefalutLayout
 
 ### NOTICE! : home, main page
 
-class page01(QMainWindow):
+class page01(DefalutLayout):
      def __init__(self):
           super().__init__()
-          self.initUI()
 
-     def initUI():
-          # 다른 요소에 대한 의존성
-          defalutLayout = defalut()
-
-     # 레이아웃, 스타일시트 
-     pass
-
+          self.contentLayout.addWidget(setTopSentanse())
 
 
 class setTopSentanse(QWidget):
      def __init__(self):
           super().__init__()
      
-     # 문장을 DB에서 추출
-     # 
-     temp = "안녕하세요! Shorty입니다 😊\n단어, 짧은 복습 어떠신가요?"
+          # temp의 문장을 DB에서 추출
+          temp = "안녕하세요! Shorty입니다 😊\n단어, 짧은 복습 어떠신가요?"
+          sentanse = QLabel(temp)
 
-     sentanse = QLabel(temp)
-     font = QFont("Do Hyeon",25,QFont.Weight.regular)
-     sentanse.setFont(font)
+          font = QFont("Do Hyeon",25,QFont.Weight.regular)
+          sentanse.setFont(font)
+
+          layout = QVBoxLayout()
+          layout.addWidget(sentanse)
+
+          self.setLayout(layout)
+          
+
 
 class setStartButton(QPushButton):
      pass
+
 
 class setCategories(QWidget):
      pass

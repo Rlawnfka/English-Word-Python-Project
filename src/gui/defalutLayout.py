@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
+
 class CreateLogo(QWidget):
     def __init__(self):
         super().__init__()
@@ -29,15 +30,17 @@ class CreateNav(QWidget):
         iconAdd = QIcon("/assets/icons/iconAdd.svg")
         iconSetting = QIcon("/assets/icons/iconSetting.svg")
         iconProfile = QIcon("/assets/icons/iconProfile.svg")
-
+        
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
 
-        for i in iconList:
+        layout = QHBoxLayout()
+
+        for i, icon in enumerate(iconList):
             button = QPushButton()
-            button.setIcon(iconList[i])
+            button.setIcon(icon)
             button.setIconSize(QSize(35,35))
-            button.setFlat(True) # 입체감 없애!!!!!!!!!
-            button.setCheckable(True) # 클릭 상태 유지  isCheched()로 확인 후 hover먹이기
+            button.setFlat(True) # 입체감
+            button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
             button.setStyleSheet("""
                                 QPushButton{
                                  color: TEXT['primary']
@@ -49,24 +52,22 @@ class CreateNav(QWidget):
             """)
             layout.addWidget(button)
 
-        layout = QHBoxLayout()
-
+        
 
 
 # 모든 페이지에 나오는 logo, nav 레이아웃 & 
 # 페이지 기본 레이아웃 설정~``
-class defalut(QWidget):
+class defalutLayout(QWidget):
     def __init__(self):
         super().__init__()
         self.HEIGHT = 900
         self.WIDTH = 550
-
         self.initUI()
 
     def initUI(self):
         # 기본 세팅, 움직임
         self.setStyleSheet("""
-                           background-color:{BACKGROUND['main']};
+                           background-color: BACKGROUND['main'];
                            
                            """)
         # 전에 열렸던 자리 기억
@@ -74,7 +75,18 @@ class defalut(QWidget):
         self.setWindowTitle("Shorty!")
         self.setFixedSize(self.WIDTH, self.HEIGHT)
         
-        layout = QVBoxLayout()
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
+
+        # 상단에 LOGO 고정하긔..
+        self.layout.addWidget(CreateLogo())
+
+        # 중간 
+        self.contentLayout = QVBoxLayout()
+        self.layout.addLayout(self.contentLayout)
+
+        # 하단 nav 고정
+        self.layout.addWidget(CreateNav())
 
 
 

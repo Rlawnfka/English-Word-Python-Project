@@ -3,17 +3,17 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
-import defalut
+from gui.DefalutLayout import DefalutLayout
 
 ### NOTICE! : select title
 
-class page02(QMainWindow):
+class page02(DefalutLayout):
      def __init__(self):
           super().__init__()
           self.initUI()
 
      def initUI():
-          defalutLayout = defalut()
+          pass
 
 
 class setBarList(QWidget):
