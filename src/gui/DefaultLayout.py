@@ -11,11 +11,12 @@ from gui.page03 import page03
 from gui.page03_01 import page03_01
 from gui.page04 import page04
 from gui.page05 import page05
-from gui.page06 import page06
 
 class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
+
+
         self.HEIGHT = 900
         self.WIDTH = 550
         
@@ -38,6 +39,10 @@ class DefaultLayout(QWidget):
 
         # 중간 내용 <- 각 페이지의 클래스에서 설정 (상속 통해서)
         self.contentLayout = QVBoxLayout()
+        self.stack = QStackedLayout()
+
+        self.contentLayout.addLayout(self.stack)
+        
         self.layout.addLayout(self.contentLayout)
 
         # 하단 nav 고정
@@ -66,14 +71,12 @@ class CreateNav(QWidget):
         super().__init__()
         self.stack = stack
 
-        self.stack = QStackedLayout()   # 인덱스 동작 -> 처음 선언 순으로 0 씩 증가 
-        self.stack.addWidget(page01())  # 
-        self.stack.addWidget(page02())
-        self.stack.addWidget(page03())
+        self.stack.addWidget(page01())  # 홈        0
+        self.stack.addWidget(page02())  # 리스트    3
+        self.stack.addWidget(page03())  # 리스트 -> 상세
         self.stack.addWidget(page03_01())
-        self.stack.addWidget(page04())
-        self.stack.addWidget(page05())
-        self.stack.addWidget(page06())
+        self.stack.addWidget(page04())  # 추가      1
+        self.stack.addWidget(page05())  # 세팅      2
 
         iconHome = QIcon("../assets/icons/iconHome.svg")
         iconAdd = QIcon("../assets/icons/iconAdd.svg")
@@ -81,6 +84,7 @@ class CreateNav(QWidget):
         iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
+        page = [0, 3, 1, 2]
 
         layout = QHBoxLayout()
 
@@ -90,7 +94,7 @@ class CreateNav(QWidget):
             button.setIconSize(QSize(35,35))
             button.setFlat(True) # 입체감 없애기
             button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
-            button.clicked.connect(lambda: self.stack.setCurrentIndex(i))
+            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[i]))
             button.setStyleSheet(f"""
                 QPushButton{{
                     color: {TEXT['primary']};

@@ -7,7 +7,6 @@ from gui.page03 import page03
 from gui.page03_01 import page03_01
 from gui.page04 import page04
 from gui.page05 import page05
-from gui.page06 import page06
 
 import warnings
 warnings.simplefilter("always")
