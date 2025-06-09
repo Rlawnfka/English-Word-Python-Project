@@ -102,5 +102,4 @@ class CreateNav(QWidget):
             """)
             layout.addWidget(button)
     
-    
         
