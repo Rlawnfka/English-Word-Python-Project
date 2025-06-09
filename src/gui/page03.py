@@ -3,6 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
 from gui.DefaultLayout import DefaultLayout
+from defalut_setting.colors import *
 
 ### NOTICE! : wordList 상세 페이지 & word 복습
 
