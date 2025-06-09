@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
+from datetime import datetime
 
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
@@ -13,58 +14,188 @@ from data.word_manager import *
 class page03(DefaultLayout):
      def __init__(self):
           super().__init__()
-          self.contentLayout.addWidget(categoryInfo())
+          self.contentLayout.addWidget(topWidget())
           self.contentLayout.addWidget(unknownWordButtons())
-          
-class categoryInfo:
+
+class showTitleInfo(QWidget):
+     def __init__(self, title: str, getdate: str, language: str):
+          super().__init__()
+
+          titleLabel = QLabel(title)
+          titleLabel.setFont(QFont("Pretandard", 30, QFont.Weight.Bold))
+
+          dateLabel = QLabel(getdate)
+          languageLabel = QLabel(" · "+language)
+          dateLabel.setFont(QFont("Pretandard", 17, QFont.Weight.Normal))
+          languageLabel.setFont(QFont("Pretandard", 17, QFont.Weight.Normal))
+
+          textGrayBottom = QHBoxLayout()
+          textGrayBottom.addWidget(dateLabel)
+          textGrayBottom.addWidget(languageLabel)
+
+          textLayout = QVBoxLayout()
+          textLayout.addWidget(titleLabel)
+          textLayout.addLayout(textGrayBottom)
+
+          self.setLayout(textLayout)
+
+class editRemoveButtons(QWidget):
      def __init__(self):
           super().__init__()
 
-          
-          # db에서 가져온 정보들
-          language = DATA.doc["language"] 
-          firstDate = DATA.onlyDate
+          # 수정 버튼
+          editButton = QPushButton() 
+          editButton.setIcon(QIcon("/src/assets/icons/editIcon.png"))
+          editButton.setIconSize(QSize(32,32)) 
+          # 창이 늘어나도 크기 변하지 않음
+          editButton.setFixedSize(32,32) 
+          # 다른 페이지로 이동
+          editButton.clicked.connect(lambda:None) 
 
-          categoryTitle = QLabel("unit4 English")
-          date = QLabel(firstDate+" · "+language) #날짜와 언어는 db에서 가져오기
+          # 삭제 버튼
+          binButton = QPushButton() 
+          binButton.setIcon(QIcon("/src/assets/icons/iconBin.png"))
+          binButton.setIconSize(QSize(32,32))
+          binButton.setFixedSize(32,32)
+          binButton.clicked.connect(lambda:None)
 
-          self.setWidget(categoryTitle)
-          self.setWidget(date)
+          # 수정버튼 + 삭제버튼
+          buttons = QHBoxLayout()
+          buttons.addWidget(editButton)
+          buttons.addWidget(binButton)
 
-class editRemoveButtons:
+          self.setLayout(buttons)
+
+class topWidget(QWidget):
      def __init__(self):
           super().__init__()
 
-          layout = QHBoxLayout()
+          # 왼쪽 / 제목 + 날짜 + 언어
+          titleInfo = showTitleInfo(DATA.getTitle, DATA.getDate, DATA.getLanguage)
 
-          self.editButton = QPushButton()
-          self.editButton.setIcon(QIcon("/src/assets/icons/editIcon.png"))
-          self.editButton.setIconSize(32,32) 
-          self.editButton.setFixedSize(32,32) # 창이 늘어나도 크기 변하지 않음
-          self.editButton.clicked.connect() # page03_01.py로 이동
+          # 오른쪽 / 수정 버튼, 삭제 버튼
+          modifyButtons = editRemoveButtons()
 
-          self.binButton = QPushButton()
-          self.binButton.setIcon(QIcon("/src/assets/icons/iconBin.png"))
-          self.binButton.setIconSize(32,32)
-          self.binButton.setFixedSize(32,32)
-          self.binButton.clicked.connect()
+          # 전체 가로로 정렬하기
+          topLayout = QHBoxLayout()
+          topLayout.addWidget(titleInfo) # 왼쪽에 제목 
+          topLayout.addStretch() # 가운데 공간 밀기
+          topLayout.addWidget(modifyButtons)  # 오른쪽에 버튼
 
-          layout.addStretch() # 오른쪽 정렬
-          layout.addWidget(self.editButton)
-          layout.addWidget(self.binButton)
-
-class unknownWordButtons: 
-     def __init__(self):
-          super().__init__()
-          layout = QHBoxLayout() 
-          reviewButton = QPushButton("REVIEW")
-          reviewButton.clicked.connect()
-          staredButton = QPushButton("STARED")
-          staredButton.clicked.connect()
-
-          layout.addStretch() # 오른쪽 정렬
-          self.addWidget(reviewButton)
-          self.addWidget(staredButton)
-
-
+          self.setLayout(topLayout)
      
+class unknownWordButtons(QWidget): 
+     def __init__(self):
+          super().__init__()
+
+          # f-string 쓸 때는 중괄호를 이중으로 {{}}
+          buttonStyle = f"""
+          QPushButton {{
+               background-color: {COLOR['primary']};
+               color:white;
+               border:none;
+               border-radius:12px;
+               padding:8px 24px;
+               font-size:16px;
+               font-weight:bold;
+               }}
+          QPushButton:hover {{
+               background-color: {COLOR['hover']};
+          }}
+          """
+ 
+          # REVIEW 버튼
+          reviewButton = QPushButton("REVIEW")
+          reviewButton.setStyleSheet(buttonStyle)
+          reviewButton.clicked.connect(self.updateLastReview) 
+
+          #STARED 버튼
+          staredButton = QPushButton("STARED")
+          staredButton.setStyleSheet(buttonStyle)
+          staredButton.clicked.connect(lambda:None)
+
+          buttons = QHBoxLayout() 
+          buttons.addWidget(reviewButton)
+          buttons.addWidget(staredButton)
+          self.setLayout(buttons)
+
+     # REVIEW 버튼 클릭하면 최근(오늘) 날짜 lastReviewed에 저장
+     # 오늘 날짜 구하는 함수
+     def updateLastReview(self):
+          today = datetime.today().strftime("%Y/%m/%d")
+          # DB에 lastReviewed 저장하는 코드 작성
+          # lastreviewDate 바뀌어야 함
+
+class lastReviewClass(QWidget):
+     def __init__(self):
+          super().__init__()
+          
+          # last-review label
+          lastViewLabel = QLabel("last-review")
+          lastViewLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          # last-review date
+          self.lastViewDate = QLabel() # last-review 날짜 넣어야함
+          self.lastViewDate.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          # 세로 정렬
+          lastLayout = QVBoxLayout()
+          lastLayout.addWidget(lastViewLabel)
+          lastLayout.addWidget(self.lastViewDate)
+
+          self.setLayout(lastLayout)
+
+class ReviewedClass(QWidget):
+     def __init__(self):
+          super().__init__()
+
+          # reviewed label
+          reviewedLabel = QLabel("reviewed")
+          reviewedLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          # reviewed number
+          self.reviewedNumber = QLabel() # reviewed 날짜 넣어야함
+          self.reviewedNumber.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          # 세로 정렬
+          reviewedLayout = QVBoxLayout()
+          reviewedLayout.addWidget(reviewedLabel)
+          reviewedLayout.addWidget(self.reviewedNumber)
+
+          self.setLayout(reviewedLayout)
+
+class ProgressClass(QWidget):
+     def __init__(self):
+          super().__init__()
+
+          # progress label
+          progressLabel = QLabel("progress")
+          progressLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          # progress
+          self.progressValue = QLabel() # 계산해서 넣어야함
+          self.progressValue.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          # 세로 정렬
+          progressLayout = QVBoxLayout()
+          progressLayout.addWidget(progressLabel)
+          progressLayout.addWidget(self.progressValue)
+
+          self.setLayout(progressLayout)
+
+class reviewProgressInfo(QWidget):
+     def __init__(self):
+          super().__init__()
+
+          lastReview = lastReviewClass()
+          reviewed = ReviewedClass()
+          progress = ProgressClass()
+
+          reviewProgress = QHBoxLayout()
+          reviewProgress.addWidget(lastReview)  
+          reviewProgress.addStretch()
+          reviewProgress.addWidget(reviewed)
+          reviewProgress.addStretch()
+          reviewProgress.addWidget(progress)
+
+          self.setLayout(reviewProgress)
+
+class WordLabels(QLabel):
+     def __init__(self):
+          super().__init__()
+
+          # 단어 카드들 구현
