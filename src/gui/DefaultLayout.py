@@ -13,7 +13,6 @@ from gui.page04 import page04
 from gui.page05 import page05
 from gui.page06 import page06
 
-
 class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
@@ -102,6 +101,5 @@ class CreateNav(QWidget):
                 }}
             """)
             layout.addWidget(button)
-    
     
         

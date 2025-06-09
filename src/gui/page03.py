@@ -3,6 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
 from gui.DefaultLayout import DefaultLayout
+from defalut_setting.colors import *
 
 from ..data import word_manager as DATA
 from data.word_manager import *
