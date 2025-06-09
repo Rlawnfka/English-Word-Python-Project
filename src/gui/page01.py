@@ -1,3 +1,4 @@
+import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -10,7 +11,6 @@ from defalut_setting.colors import *
 class page01(DefaultLayout):
      def __init__(self):
           super().__init__()
-
           self.contentLayout.addWidget(setTopSentanse())
           self.contentLayout.addWidget(setStartButton())
           self.contentLayout.addWidget(setCategories())
@@ -40,6 +40,7 @@ class setStartButton(QWidget):
           startButton = QPushButton("START")
           startButton.setFixedHeight(60)
           startButton.setFixedWidth(250)
+          # startButton.setFixedSize(60, 250)
 
           startButton.setStyleSheet(f"""
                QPushButton{{
@@ -156,4 +157,10 @@ class setQuizBox(QWidget):
           layout.addWidget(button)
           returnWidget.setLayout(layout)
           return returnWidget
+     
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = page01()  # 얘가 QWidget이니까 바로 실행 가능
+    window.show()
+    sys.exit(app.exec())
   

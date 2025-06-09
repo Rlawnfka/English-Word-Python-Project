@@ -5,6 +5,14 @@ from PyQt6.QtCore import *
 
 from defalut_setting.colors import *
 
+from gui.page01 import page01
+from gui.page02 import page02
+from gui.page03 import page03
+from gui.page03_01 import page03_01
+from gui.page04 import page04
+from gui.page05 import page05
+from gui.page06 import page06
+
 
 class DefaultLayout(QWidget):
     def __init__(self):
@@ -26,15 +34,15 @@ class DefaultLayout(QWidget):
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
-        # 상단에 LOGO 고정하긔..
+        # 상단에 Logo 고정
         self.layout.addWidget(CreateLogo())
 
-        # 중간 
+        # 중간 내용 <- 각 페이지의 클래스에서 설정 (상속 통해서)
         self.contentLayout = QVBoxLayout()
         self.layout.addLayout(self.contentLayout)
 
         # 하단 nav 고정
-        self.layout.addWidget(CreateNav())
+        self.layout.addWidget(CreateNav(self.stack))
         
 
 class CreateLogo(QWidget):
@@ -55,12 +63,23 @@ class CreateLogo(QWidget):
         
 
 class CreateNav(QWidget):
-    def __init__(self):
+    def __init__(self, stack: QStackedLayout):      # 스택을 받아서 사용 DefaultLayout -> CreateNav
         super().__init__()
-        iconHome = QIcon("/assets/icons/iconHome.svg")
-        iconAdd = QIcon("/assets/icons/iconAdd.svg")
-        iconSetting = QIcon("/assets/icons/iconSetting.svg")
-        iconProfile = QIcon("/assets/icons/iconProfile.svg")
+        self.stack = stack
+
+        self.stack = QStackedLayout()   # 인덱스 동작 -> 처음 선언 순으로 0 씩 증가 
+        self.stack.addWidget(page01())  # 
+        self.stack.addWidget(page02())
+        self.stack.addWidget(page03())
+        self.stack.addWidget(page03_01())
+        self.stack.addWidget(page04())
+        self.stack.addWidget(page05())
+        self.stack.addWidget(page06())
+
+        iconHome = QIcon("../assets/icons/iconHome.svg")
+        iconAdd = QIcon("../assets/icons/iconAdd.svg")
+        iconSetting = QIcon("../assets/icons/iconSetting.svg")
+        iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
 
@@ -70,8 +89,9 @@ class CreateNav(QWidget):
             button = QPushButton()
             button.setIcon(icon)
             button.setIconSize(QSize(35,35))
-            button.setFlat(True) # 입체감
+            button.setFlat(True) # 입체감 없애기
             button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
+            button.clicked.connect(lambda: self.stack.setCurrentIndex(i))
             button.setStyleSheet(f"""
                 QPushButton{{
                     color: {TEXT['primary']};
@@ -82,5 +102,6 @@ class CreateNav(QWidget):
                 }}
             """)
             layout.addWidget(button)
-
+    
+    
         
