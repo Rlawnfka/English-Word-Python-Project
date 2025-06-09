@@ -5,7 +5,6 @@ from PyQt6.QtCore import *
 
 from defalut_setting.colors import *
 
-<<<<<<< HEAD
 from gui.page01 import page01
 from gui.page02 import page02
 from gui.page03 import page03
@@ -14,9 +13,6 @@ from gui.page04 import page04
 from gui.page05 import page05
 from gui.page06 import page06
 
-
-=======
->>>>>>> 9bf9dd1f3bb3c9cc08167dc31002b25b10131d05
 class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
