@@ -78,7 +78,7 @@ class wordList(QWidget):
 
 # input 창 관리 클래스
 class wordInput(QWidget):
-     def __init__(self, index: int, saveWord):
+     def __init__(self, index: int, saveWord, addInput):
           super().__init__()
           self.saveWord = saveWord
 
@@ -87,25 +87,28 @@ class wordInput(QWidget):
           self.meanInput = QLineEdit()
           self.meanInput.setPlaceholderText = "meaning"
 
-          # 버튼
+          # 
           enterButton = QPushButton()
           enterButton.setIcon(QIcon("../assets/icons/iconEnter.png"))
           enterButton.setIconSize(QSize(23, 16))
           enterButton.setFlat(True) #배경 없애기
+          enterButton.clicked.connect(submit)
+          
+          self.wordInput.returnPressed.connect(submit)
+          self.meanInput.returnPressed.connect(submit)
 
           deleteButton = QPushButton()
           deleteButton.setIcon(QIcon("../assets/icons/iconBin.png"))
           deleteButton.setIconSize(QSize(23,27))
           deleteButton.setFlat(True)
 
+          # layout
           horiz1 = QHBoxLayout()   # 각 인풋을 반씩 나누어 합친다음 위아래로
           horiz2 = QHBoxLayout() 
-
-          #레이아웃
           horiz1.addWidget(QLabel(str(index)))
           horiz1.addWidget(self.wordInput)
           horiz1.addWidget(deleteButton)
-          horiz2.addwidget(QLabel()) #간격
+          # horiz2.addwidget(QLabel()) #간격
           horiz2.addWidget(self.meanInput)
           horiz2.addWidget(enterButton)
 

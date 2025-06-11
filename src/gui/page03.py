@@ -177,6 +177,7 @@ class ProgressClass(QWidget):
 
           self.setLayout(progressLayout)
 
+# TODO : 조회 저장 기능 구현
 class reviewProgressInfo(QWidget):
      def __init__(self):
           super().__init__()

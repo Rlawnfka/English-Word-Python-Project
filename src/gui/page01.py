@@ -6,7 +6,11 @@ from PyQt6.QtCore import *
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
-### NOTICE! : home, main page
+'''
+ NOTICE! : home, main page
+### TODO : quixBox에 클릭된 버튼 정답 확인 로직
+
+'''
 
 class page01(DefaultLayout):
      def __init__(self):

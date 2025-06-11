@@ -5,28 +5,22 @@ from PyQt6.QtCore import *
 
 from defalut_setting.colors import *
 
-from gui.page01 import page01
-from gui.page02 import page02
-from gui.page03 import page03
-from gui.page03_01 import page03_01
-from gui.page04 import page04
-from gui.page05 import page05
-
+# XXX : stackedLayout 연결이 안됌. 특히 nav와의 연결이 불완전
+# nav를 DefaultLayout의 함수로 바꾸면서 해결중
 class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
-
 
         self.HEIGHT = 900
         self.WIDTH = 550
         
         # 기본 세팅, 움직임
+        # 전에 열렸던 자리 기억
         self.setStyleSheet(f"""
             *{{
                 background-color: {BACKGROUND['main']};
             }}
         """)
-        # 전에 열렸던 자리 기억
         
         self.setWindowTitle("Shorty!")
         self.setFixedSize(self.WIDTH, self.HEIGHT)
@@ -63,20 +57,13 @@ class CreateLogo(QWidget):
             font-size : 32px;
             font-weight: 400;
             font-style: normal;
-          """)
+        """)
         
 
 class CreateNav(QWidget):
     def __init__(self, stack: QStackedLayout):      # 스택을 받아서 사용 DefaultLayout -> CreateNav
         super().__init__()
         self.stack = stack
-
-        self.stack.addWidget(page01())  # 홈        0
-        self.stack.addWidget(page02())  # 리스트    3
-        self.stack.addWidget(page03())  # 리스트 -> 상세
-        self.stack.addWidget(page03_01())
-        self.stack.addWidget(page04())  # 추가      1
-        self.stack.addWidget(page05())  # 세팅      2
 
         iconHome = QIcon("../assets/icons/iconHome.svg")
         iconAdd = QIcon("../assets/icons/iconAdd.svg")
@@ -94,7 +81,7 @@ class CreateNav(QWidget):
             button.setIconSize(QSize(35,35))
             button.setFlat(True) # 입체감 없애기
             button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
-            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[i]))
+            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[i])) # 인덱스 끝으로 인식되는 문제 -> index=i로 해결
             button.setStyleSheet(f"""
                 QPushButton{{
                     color: {TEXT['primary']};
