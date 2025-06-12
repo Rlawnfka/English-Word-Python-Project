@@ -41,7 +41,7 @@ class DefaultLayout(QWidget):
         self.layout.addLayout(self.contentLayout)
 
         # 하단 nav 고정
-        self.layout.addWidget(CreateNav(self.stack))
+        # self.layout.addWidget(CreateNav(self.stack))
         
         
 
@@ -62,37 +62,37 @@ class CreateLogo(QWidget):
         """)
         
 
-class CreateNav(QWidget):
-    def __init__(self, stack: QStackedLayout):      # 스택을 받아서 사용 DefaultLayout -> CreateNav
-        super().__init__()
-        self.stack = stack
+# class CreateNav(QWidget):
+#     def __init__(self, stack: QStackedLayout):      # 스택을 받아서 사용 DefaultLayout -> CreateNav
+#         super().__init__()
+#         self.stack = stack
 
-        iconHome = QIcon("../assets/icons/iconHome.svg")
-        iconAdd = QIcon("../assets/icons/iconAdd.svg")
-        iconSetting = QIcon("../assets/icons/iconSetting.svg")
-        iconProfile = QIcon("../assets/icons/iconProfile.svg")
+#         iconHome = QIcon("../assets/icons/iconHome.svg")
+#         iconAdd = QIcon("../assets/icons/iconAdd.svg")
+#         iconSetting = QIcon("../assets/icons/iconSetting.svg")
+#         iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
-        iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        page = [0, 3, 1, 2]
+#         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
+#         page = [0, 3, 1, 2]
 
-        layout = QHBoxLayout()
+#         layout = QHBoxLayout()
 
-        for i, icon in enumerate(iconList):
-            button = QPushButton()
-            button.setIcon(icon)
-            button.setIconSize(QSize(35,35))
-            button.setFlat(True) # 입체감 없애기
-            button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
-            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[i])) # 인덱스 끝으로 인식되는 문제 -> index=i로 해결
-            button.setStyleSheet(f"""
-                QPushButton{{
-                    color: {TEXT['primary']};
-                    background-color : transparent;
-                }}
-                QPushButton:hover{{
-                    color: {COLOR['hover']};
-                }}
-            """)
-            layout.addWidget(button)
+#         for i, icon in enumerate(iconList):
+#             button = QPushButton()
+#             button.setIcon(icon)
+#             button.setIconSize(QSize(35,35))
+#             button.setFlat(True) # 입체감 없애기
+#             button.setCheckable(True) # 클릭 상태 유지  isChecked()로 확인 후 hover먹이기
+#             button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[i])) # 인덱스 끝으로 인식되는 문제 -> index=i로 해결
+#             button.setStyleSheet(f"""
+#                 QPushButton{{
+#                     color: {TEXT['primary']};
+#                     background-color : transparent;
+#                 }}
+#                 QPushButton:hover{{
+#                     color: {COLOR['hover']};
+#                 }}
+#             """)
+#             layout.addWidget(button)
     
         

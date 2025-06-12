@@ -10,6 +10,8 @@ from PyQt6.QtCore import(
     QSize
 )
 
+from util.setDir import *
+
 import warnings                 # 오류 표시
 warnings.simplefilter("always")
 
@@ -22,6 +24,8 @@ from gui.page03 import page03
 from gui.page03_01 import page03_01
 from gui.page04 import page04
 from gui.page05 import page05
+
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -59,7 +63,6 @@ class MainWindow(QMainWindow):
         iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        # pages = [0, 3, 1, 2]
         for i, icon in enumerate(iconList):
             btn = QPushButton()
             btn.setIcon(icon)
