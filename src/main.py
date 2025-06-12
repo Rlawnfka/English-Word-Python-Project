@@ -1,15 +1,5 @@
 import sys
-from PyQt6.QtWidgets import( 
-    QApplication, QMainWindow, QStackedWidget, QWidget, QHBoxLayout, QVBoxLayout,
-    QPushButton
-)
-from PyQt6.QtGui import(
-    QIcon,
-) 
-from PyQt6.QtCore import(
-    QSize
-)
-
+from util.importQt import *
 from util.setDir import *
 
 import warnings                 # 오류 표시
