@@ -5,7 +5,7 @@ from PyQt6.QtCore import *
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
-### NOTICE! : select title
+### NOTICE! : profile & select title
 
 class page02(DefaultLayout):
      def __init__(self):

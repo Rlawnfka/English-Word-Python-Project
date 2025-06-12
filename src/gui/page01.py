@@ -13,8 +13,8 @@ from defalut_setting.colors import *
 '''
 
 class page01(DefaultLayout):
-     def __init__(self):
-          super().__init__()
+     def __init__(self, stack):
+          super().__init__(stack)
           self.contentLayout.addWidget(setTopSentanse())
           self.contentLayout.addWidget(setStartButton())
           self.contentLayout.addWidget(setCategories())
@@ -162,9 +162,3 @@ class setQuizBox(QWidget):
           returnWidget.setLayout(layout)
           return returnWidget
      
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = page01()  # 얘가 QWidget이니까 바로 실행 가능
-    window.show()
-    sys.exit(app.exec())
-  

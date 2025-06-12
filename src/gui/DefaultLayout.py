@@ -1,4 +1,3 @@
-import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -6,36 +5,38 @@ from PyQt6.QtCore import *
 from defalut_setting.colors import *
 
 # XXX : stackedLayout 연결이 안됌. 특히 nav와의 연결이 불완전
-# nav를 DefaultLayout의 함수로 바꾸면서 해결중
+# TODO : nav를 DefaultLayout의 함수로 바꾸면서 해결중
 class DefaultLayout(QWidget):
-    def __init__(self):
+    def __init__(self, stack: QStackedWidget):
         super().__init__()
+        self.stack = stack
 
         self.HEIGHT = 900
         self.WIDTH = 550
         
         # 기본 세팅, 움직임
         # 전에 열렸던 자리 기억
+        
+        self.setWindowTitle("Shorty!")
+        self.setFixedSize(self.WIDTH, self.HEIGHT)
         self.setStyleSheet(f"""
             *{{
                 background-color: {BACKGROUND['main']};
             }}
         """)
-        
-        self.setWindowTitle("Shorty!")
-        self.setFixedSize(self.WIDTH, self.HEIGHT)
+        ######## layout
         
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
         # 상단에 Logo 고정
         self.layout.addWidget(CreateLogo())
+        self.layout.addWidget(self.stack)
+
 
         # 중간 내용 <- 각 페이지의 클래스에서 설정 (상속 통해서)
         self.contentLayout = QVBoxLayout()
         self.stack = QStackedLayout()
-
-        self.contentLayout.addLayout(self.stack)
         
         self.layout.addLayout(self.contentLayout)
 

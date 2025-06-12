@@ -8,8 +8,8 @@ from defalut_setting.colors import *
 ### NOTICE! : add page
 
 class page04(DefaultLayout):
-     def __init__(self):
-          super().__init__()
+     def __init__(self, stack):
+          super().__init__(stack)
           self.infoWidget = inputInfo()
           self.wordListWidget = wordList()
           self.contentLayout.addWidget(self.infoWidget) 

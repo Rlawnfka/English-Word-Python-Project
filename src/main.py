@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import( 
     QApplication, QMainWindow, QStackedWidget, QWidget, QHBoxLayout, QVBoxLayout,
-    QPushButton, Qsize
+    QPushButton
 )
 from PyQt6.QtGui import(
     QIcon,
@@ -26,27 +26,28 @@ from gui.page05 import page05
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()        
-        self.setCentralWidget(DefaultLayout())
+        
+        self.stack = QStackedWidget()
+        self.stack.addWidget(page01(self.stack))  # 홈        0
+        self.stack.addWidget(page04(self.stack))  # 추가      1
+        self.stack.addWidget(page05(self.stack))  # 세팅      2
+        self.stack.addWidget(page02(self.stack))  # 프로필    3
+        self.stack.addWidget(page03(self.stack))  # 홈의 버튼으로 이동
+        self.stack.addWidget(page03_01(self.stack))
 
         self.DefLayout = DefaultLayout()
         self.setCentralWidget(self.DefLayout)
+
+        self.setCentralWidget(self.layout)
+
+        self.layout.setContnet(self.stack)
+        self.layout.setNav(self.createNav())
 
         self.setStyleSheet(f"""
             *{{
                 background-color: {BACKGROUND['main']};
             }}
         """)
-        
-        self.stack = QStackedWidget()
-        self.stack.addWidget(page01())  # 홈        0
-        self.stack.addWidget(page02())  # 리스트    3
-        self.stack.addWidget(page03())  # 리스트 -> 상세
-        self.stack.addWidget(page03_01())
-        self.stack.addWidget(page04())  # 추가      1
-        self.stack.addWidget(page05())  # 세팅      2
-
-        self.layout.setContnet(self.stack)
-        self.layout.setNav(self.createNav())
     
     def createNav(self):
         nav = QWidget()
@@ -58,7 +59,7 @@ class MainWindow(QMainWindow):
         iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        pages = [0, 3, 1, 2]
+        # pages = [0, 3, 1, 2]
         for i, icon in enumerate(iconList):
             btn = QPushButton()
             btn.setIcon(icon)
@@ -77,10 +78,9 @@ class MainWindow(QMainWindow):
 
             btn.clicked.connect(lambda _, i=i: self.stack.setCurrentIndex(i))
             layout.addWidget(btn)
-
         nav.setLayout(layout)
-        return nav
 
+        return nav
 
 
 if __name__ == "__main__":
@@ -89,5 +89,3 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
-
-# 여기서 위젯 관리 
