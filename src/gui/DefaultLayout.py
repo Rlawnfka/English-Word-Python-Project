@@ -43,6 +43,7 @@ class DefaultLayout(QWidget):
         # 하단 nav 고정
         self.layout.addWidget(CreateNav(self.stack))
         
+        
 
 class CreateLogo(QWidget):
     def __init__(self):
