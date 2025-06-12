@@ -6,7 +6,7 @@ from datetime import datetime
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
-from ..data import word_manager as DATA
+# from ..data import word_manager as DATA
 from data.word_manager import *
 
 ### NOTICE! : wordList 상세 페이지 & word 복습
