@@ -1,7 +1,9 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
+from datetime import datetime
 
+from data.word_manager import connectDB as DATA
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
@@ -25,7 +27,16 @@ class page04(DefaultLayout):
           wordData = self.wordListWidget.getWordList()
 
           # 여기서 DB처리
-
+          # title(제목) 으로 컬렉션 만들기
+          collection = self.db[title] 
+          # title에 넣을 language, wordData
+          document = {
+               "language" :language,
+               "firstDate":datetime.datetime.now(),
+               "wordData" :wordData
+          }
+          result = collection.insert_one(document)
+          print(f"inserted document ID : {result.inserted_id}")
 
 class inputInfo(QWidget): 
      def __init__(self):
@@ -56,7 +67,7 @@ class wordList(QWidget):
      def __init__(self):
           super().__init__()
           self.inputIndex = 1
-          self.wordList = []       # return vlaue 
+          self.wordList = []       # return value 
 
           self.layout = QVBoxLayout()
           self.setLayout(self.layout)
@@ -69,7 +80,7 @@ class wordList(QWidget):
           self.inputIndex += 1
 
      def saveWord(self, word, meaning):
-          self.wordList.append((word, meaning))
+          self.wordList.append([word, meaning]) ##### 데이터 넣기 편한걸로..
           self.addInputRow()
 
      def getWordList(self):
