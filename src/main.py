@@ -39,12 +39,7 @@ class MainWindow(QMainWindow):
 
         # 하단 네비게이션 연결
         self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
-
-        # self.layout = self.DefLayout
-        # self.layout.setContent(self.stack) # DafaultLayout 클래스에 setContent 메서드 없음
-        # self.layout.setNav(self.createNav()) # DafaultLayout 클래스에 setNav 메서드 없음
-    
-    
+          
     def center(self): # 화면 정가운데로 보내기
         screen = QCoreApplication.instance().primaryScreen()
         rect = screen.availableGeometry()
