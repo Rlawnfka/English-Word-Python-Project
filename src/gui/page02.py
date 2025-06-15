@@ -24,7 +24,8 @@ class page02(QWidget):
 
 
           # DB 연결
-          db = ConnectDB().db
+          connect = ConnectDB()
+          db = connect.db
           titleList = Titles(db).getTitles()
 
           # DB로 info 생성
@@ -38,11 +39,9 @@ class page02(QWidget):
                     info = createShowInfo(title, date, language)
                     self.contentLayout.addWidget(info)
 
-          # 플러스 버튼 추가
-          self.contentLayout.addWidget(info.createPlusBtn())
+          connect.close()
 
           # 콘텐츠를 스크롤 영역에 넣기
-
           scroll.setWidget(scrollContent)
           mainLayout.addWidget(scroll)
 
