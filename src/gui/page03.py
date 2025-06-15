@@ -113,14 +113,28 @@ class editRemoveButtons(QWidget):
           binButton.setIcon(QIcon(binIcon_path))
           binButton.setIconSize(QSize(32,32))
           binButton.setFixedSize(32,32)
-          binButton.clicked.connect(lambda:None)
+          binButton.clicked.connect(self.DeleteQeustion)
 
           # 수정버튼 + 삭제버튼
           buttons = QHBoxLayout()
           buttons.addWidget(editButton)
           buttons.addWidget(binButton)
-
           self.setLayout(buttons)
+
+     def DeleteQeustion(self):
+          reply = QMessageBox.question(
+               self,
+               "삭제 확인",
+               "정말 삭제하시겠습니까?",
+               QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+          )
+
+          if reply == QMessageBox.StandardButton.Yes:
+               self.DeleteWordList()
+          
+     def DeleteWordList(self):
+          # TODO : 삭제 로직 작성
+          print("WordList deleted.")          
 
 class topWidget(QWidget):
      def __init__(self):
