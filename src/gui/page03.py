@@ -1,3 +1,4 @@
+import os
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -8,11 +9,10 @@ from defalut_setting.colors import *
 
 from data.word_manager import *
 
-import os
 ### NOTICE! : wordList 상세 페이지 & word 복습
 
 class page03(QWidget):
-     def __init__(self):
+     def __init__(self, db):
           super().__init__()
           self.contentLayout = QVBoxLayout()
           self.setStyleSheet(f"""
@@ -28,6 +28,8 @@ class page03(QWidget):
           self.contentLayout.addWidget(scroll)
           self.setLayout(self.contentLayout)
 
+
+
 class cardContainer(QWidget):
      def __init__(self, words=None):
           super().__init__()
@@ -37,9 +39,10 @@ class cardContainer(QWidget):
 
           container = QWidget()
           container.setStyleSheet(f"""
-            background-color: {COLOR['secondary']};
-            border-radius: 20px;
+               background-color: {COLOR['secondary']};
+               border-radius: 20px;
           """)
+
           
           innerLayout = QVBoxLayout()
           innerLayout.setSpacing(15)

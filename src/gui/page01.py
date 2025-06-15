@@ -9,7 +9,6 @@ from defalut_setting.colors import *
 '''
  NOTICE! : home, main page
 ### TODO : quixBox에 클릭된 버튼 정답 확인 로직
-
 '''
 
 class page01(QWidget):
@@ -39,7 +38,7 @@ class setTopSentanse(QWidget):
 
           self.setStyleSheet(f"""
                color: {TEXT['primary']};
-               
+
           """)
           self.setLayout(layout)
 
@@ -65,7 +64,6 @@ class setStartButton(QWidget):
                }}               
           """)
           # 페이지 만든 후 버튼 연결
-          # startButton.clicked.connect(fn)
           layout = QVBoxLayout()
           layout.addWidget(startButton, alignment=Qt.AlignmentFlag.AlignLeft)
           self.setLayout(layout)
