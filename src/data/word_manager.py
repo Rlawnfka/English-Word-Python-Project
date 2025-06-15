@@ -9,13 +9,21 @@ load_dotenv()
 
 class ConnectDB:
     def __init__(self):
+        self.db = None
+        self.client = None
 
-        # env파일 안에 넣어둔 mongodb 비밀번호 가져오기
-        MONGO_URL = os.getenv("MONGO_URL")
+        try:
+            # env파일 안에 넣어둔 mongodb 비밀번호 가져오기
+            MONGO_URL = os.getenv("MONGO_URL")
 
-        self.client = MongoClient(MONGO_URL)
-        self.db = self.client["Titles"]
+            self.client = MongoClient(MONGO_URL)
+            self.db = self.client["Titles"]
         
+        except Exception as e:
+            print(f'DB연결 실패 : {e}')
+            self.client = None
+            self.db = None
+
     def close(self):
         self.client.close()
 
@@ -24,5 +32,8 @@ class Titles:
         self.db = db
 
     def getTitles(self):
-        return self.db.list_collection_names()
-        
+        if self.db:
+            self.db.list_collection_names()
+        else:
+            print(f"DB없어요 . 빈 리스트 반환")
+            return []
