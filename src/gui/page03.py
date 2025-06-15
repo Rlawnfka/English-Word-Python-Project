@@ -15,7 +15,14 @@ class page03(QWidget):
      def __init__(self):
           super().__init__()
           self.contentLayout = QVBoxLayout()
-          self.contentLayout.addWidget(cardContainer())
+
+          scroll = QScrollArea()
+          scroll.setWidgetResizable(True)
+
+          card = cardContainer()
+          scroll.setWidget(card)
+
+          self.contentLayout.addWidget(scroll)
           self.setLayout(self.contentLayout)
 
 class cardContainer(QWidget):
