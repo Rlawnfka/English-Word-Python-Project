@@ -12,7 +12,9 @@ from defalut_setting.colors import *
 class page04(QWidget):
      def __init__(self):
           super().__init__()
-          self.db = ConnectDB().db # DB연결
+
+          self.connectDB = ConnectDB()
+          self.db = self.connectDB.db # DB연결
 
           self.contentLayout = QVBoxLayout()
           self.setLayout(self.contentLayout)
@@ -26,6 +28,8 @@ class page04(QWidget):
           self.contentLayout.addWidget(submitButton)
      
      def allSubmit(self):
+          
+          
 
           title = self.infoWidget.getTitle().strip()
           language = self.infoWidget.getLanguage().strip()
@@ -41,7 +45,6 @@ class page04(QWidget):
                     "meaning": m,
                     "unknown": u
                })     
-          
           # 컬렉션에 넣을 데이터
           document = {
                "language": language,
@@ -51,6 +54,8 @@ class page04(QWidget):
           }
           # 컬렉션에 데이터 하나 삽입
           collection.insert_one(document)
+
+          self.connectDB.client.close()
 
 class inputInfo(QWidget): 
      def __init__(self):
