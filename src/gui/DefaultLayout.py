@@ -67,7 +67,7 @@ class CreateLogo(QWidget):
         logo = QLabel("Shorty!", self)
         logo.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
-        font = QFont("Tilt Warp", 32, QFont.Weight.Normal)
+        font = QFont("Tilt Warp", 32, QFont.Weight.Bold)
         logo.setFont(font)
 
         logo.setStyleSheet("""
@@ -89,13 +89,13 @@ class CreateNav(QWidget):
         addIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconAdd.svg")
         settingIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconSetting.svg")
         profileIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconProfile.svg")
+
         iconHome = QIcon(homeIcon_path)
         iconAdd = QIcon(addIcon_path)
         iconSetting = QIcon(settingIcon_path)
         iconProfile = QIcon(profileIcon_path)
 
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        page = [0, 4, 1, 2]
 
         layout = QHBoxLayout()
 
@@ -105,7 +105,7 @@ class CreateNav(QWidget):
             button.setIconSize(QSize(35, 35))
             button.setFlat(True)
             button.setCheckable(True)
-            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[index]))
+            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(index))
             button.setStyleSheet(f"""
                 QPushButton{{
                     color: {TEXT['primary']};
