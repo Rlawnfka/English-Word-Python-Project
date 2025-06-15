@@ -62,6 +62,23 @@ class MainWindow(QMainWindow):
     #     iconSetting = QIcon("../assets/icons/iconSetting.svg")
     #     iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
+        iconList = [iconHome, iconAdd, iconSetting, iconProfile]
+        pages = [0, 4, 1, 2]
+        for i, icon in enumerate(iconList):
+            btn = QPushButton()
+            btn.setIcon(icon)
+            btn.setIconSize(QSize(35, 35))
+            btn.setFlat(True)
+            btn.setCheckable(True)
+            btn.setStyleSheet(f"""
+                QPushButton{{
+                    color: {TEXT['primary']};
+                    background-color : transparent;
+                }}
+                QPushButton:hover{{
+                    color: {COLOR['hover']};
+                }}
+            """)
     #     iconList = [iconHome, iconAdd, iconSetting, iconProfile]
     #     pages = [0, 3, 1, 2]
     #     for i, icon in enumerate(iconList):
