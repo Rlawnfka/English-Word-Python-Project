@@ -7,8 +7,7 @@ from dotenv import load_dotenv
 # .env 파일의 환경 변수들 불러오기
 load_dotenv()
 
-
-class connectDB:
+class ConnectDB:
     def __init__(self):
 
         # mongodb 비밀번호 가져오기
@@ -20,6 +19,32 @@ class connectDB:
         self.client = MongoClient(MONGO_URL)
         self.db = self.client["Titles"] # 외부에서 접근 가능 (self.db)
         
-    
     def close(self):
         self.client.close()
+
+class WordListManager:
+    def __init__(self,db_connection):
+        self.conn = db_connection
+
+    # 단어 리스트 제목들 불러오기
+    def getList(self):
+        self.titles = []
+        pass
+
+    def createList(self, title, language):
+        pass
+
+    def deleteList(self, id):
+        pass
+
+class WordManager:
+    def __init__(self,db_connection):
+        self.conn = db_connection
+
+    # 타이틀 단어들 가져오기
+    def getWords(self, id):
+        pass
+
+
+    def addWord(self, id, word):
+        pass
