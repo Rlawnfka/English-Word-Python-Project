@@ -64,6 +64,9 @@ class showTitleInfo(QWidget):
 
           titleLabel = QLabel(title)
           titleLabel.setFont(QFont("Pretandard", 22, QFont.Weight.Bold))
+          titleLabel.setStyleSheet(f"""
+               color: {TEXT['primary']}
+          """)
 
           dateLabel = QLabel(getdate)
           languageLabel = QLabel(" · "+language)
@@ -73,12 +76,12 @@ class showTitleInfo(QWidget):
           textGrayBottom = QHBoxLayout()
           DateStyle = f"""
           QLabel {{
-               color:gray;
+               color:{TEXT['secondary']};
                }}
           """
           LanguageStyle = f"""
           QLabel {{
-               color:gray;
+               color:{TEXT['secondary']};
                margin-right:14px;
                }}
           """
