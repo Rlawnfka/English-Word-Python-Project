@@ -59,7 +59,7 @@ class MainWindow(QMainWindow):
         iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        pages = [0, 3, 1, 2]
+        pages = [0, 4, 1, 2]
         for i, icon in enumerate(iconList):
             btn = QPushButton()
             btn.setIcon(icon)
