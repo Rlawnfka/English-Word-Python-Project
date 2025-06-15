@@ -9,7 +9,7 @@ from defalut_setting.colors import *
 ### NOTICE! : select title
 
 class page02(QWidget):
-     def __init__(self):
+     def __init__(self, db):
           super().__init__()
           mainLayout = QVBoxLayout(self)
           
@@ -24,8 +24,7 @@ class page02(QWidget):
 
 
           # DB 연결
-          connect = ConnectDB()
-          db = connect.db
+          self.db = db
           titleList = Titles(db).getTitles()
 
           # DB로 info 생성
@@ -38,8 +37,6 @@ class page02(QWidget):
                     language = document.get("language")
                     info = createShowInfo(title, date, language)
                     self.contentLayout.addWidget(info)
-
-          connect.close()
 
           # 콘텐츠를 스크롤 영역에 넣기
           scroll.setWidget(scrollContent)
