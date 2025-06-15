@@ -32,7 +32,7 @@ class Titles:
         self.db = db
 
     def getTitles(self):
-        if self.db:
+        if self.db is None:
             self.db.list_collection_names()
         else:
             print(f"DB없어요 . 빈 리스트 반환")

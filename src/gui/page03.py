@@ -15,6 +15,9 @@ class page03(QWidget):
      def __init__(self):
           super().__init__()
           self.contentLayout = QVBoxLayout()
+          self.setStyleSheet(f"""
+               color:{TEXT['primary']};
+          """)
 
           scroll = QScrollArea()
           scroll.setWidgetResizable(True)

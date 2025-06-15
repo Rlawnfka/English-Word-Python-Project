@@ -43,8 +43,6 @@ class MainWindow(QMainWindow):
         self.DefLayout.addPage(page03())#단어 상세페이지
         self.DefLayout.addPage(page03_01())
 
-
-        # 네비게이션 연결
         self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
 
         self.setStyleSheet(f"""

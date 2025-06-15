@@ -39,6 +39,7 @@ class setTopSentanse(QWidget):
 
           self.setStyleSheet(f"""
                color: {TEXT['primary']};
+               
           """)
           self.setLayout(layout)
 
@@ -48,8 +49,7 @@ class setStartButton(QWidget):
      def __init__(self, stack: QStackedLayout):
           super().__init__()
           startButton = QPushButton("START STUDY!")
-          startButton.setFixedHeight(60)
-          startButton.setFixedWidth(250)
+          startButton.setFixedSize(250, 60)
           startButton.clicked.connect(lambda: stack.setCurrentIndex(3))
 
           startButton.setStyleSheet(f"""
@@ -74,7 +74,7 @@ class setStartButton(QWidget):
 class setCategories(QWidget):
      def __init__(self):
           super().__init__()
-
+          ################  
           # DB에서 가장 최근(날짜기준)에 학습한 3개의 단어장 제목 가져오기
           # 현재 배열은 임시
           recentTitle = ["토익 단어장", "수능 필수 어휘2", "영어회화 학원 정리1 5월 29일"]

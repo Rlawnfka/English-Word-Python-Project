@@ -22,6 +22,7 @@ class page04(QWidget):
           self.wordListWidget = wordList()
           self.contentLayout.addWidget(self.infoWidget) 
           self.contentLayout.addWidget(self.wordListWidget)
+          self.setStyleSheet(f"""color:{TEXT['primary']}""")
           # 버튼set
           submitButton = QPushButton("submit")
           submitButton.clicked.connect(self.allSubmit)

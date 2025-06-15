@@ -6,7 +6,7 @@ from gui.DefaultLayout import DefaultLayout
 from data.word_manager import ConnectDB,Titles
 from defalut_setting.colors import *
 
-### NOTICE! : select title
+### NOTICE! : select title 
 
 class page02(QWidget):
      def __init__(self):
@@ -46,7 +46,7 @@ class page02(QWidget):
           mainLayout.addWidget(scroll)
 
 
-#  만듭니다.
+#  만듭니다. 츠쿠리마스.
 class createShowInfo(QWidget):
      def __init__(self, title : str, getdate:str, language: str):
           super().__init__()
@@ -57,7 +57,7 @@ class createShowInfo(QWidget):
           dateLabel = QLabel(getdate)
           languageLabel = QLabel(language)
           
-          # 에러 발생 가능성
+          # 에러 발생 가능성 지움
           # bookLabel = QLabel("../assets/icons/iconBook.png") 
 
           # 날짜 + 언어 
