@@ -29,6 +29,11 @@ class MainWindow(QMainWindow):
         self.DefLayout = DefaultLayout()
         self.setCentralWidget(self.DefLayout)
 
+        self.HEIGHT = 790
+        self.WIDTH = 550
+        
+        self.setFixedSize(self.WIDTH, self.HEIGHT)
+
         # 페이지 추가
         self.DefLayout.addPage(page01(self.DefLayout.stack))#home
         self.DefLayout.addPage(page04())#단어추가 페이지

@@ -11,11 +11,11 @@ class DefaultLayout(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.HEIGHT = 790
-        self.WIDTH = 550
+        # self.HEIGHT = 790
+        # self.WIDTH = 550
 
         self.setWindowTitle("Shorty!")
-        self.setFixedSize(self.WIDTH, self.HEIGHT)
+        # self.setFixedSize(self.WIDTH, self.HEIGHT)
 
         self.setStyleSheet(f"""
             *{{
