@@ -3,7 +3,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from datetime import datetime
 
-from data.word_manager import ConnectDB
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
@@ -51,8 +50,6 @@ class page04(QWidget):
           }
           # 컬렉션에 데이터 하나 삽입
           collection.insert_one(document)
-
-          self.connectDB.client.close()
 
 class inputInfo(QWidget): 
      def __init__(self):

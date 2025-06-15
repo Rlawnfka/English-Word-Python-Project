@@ -3,7 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
 from gui.DefaultLayout import DefaultLayout
-from data.word_manager import ConnectDB,Titles
+from data.word_manager import Titles
 from defalut_setting.colors import *
 
 ### NOTICE! : select title 
@@ -42,8 +42,6 @@ class page02(QWidget):
           scroll.setWidget(scrollContent)
           mainLayout.addWidget(scroll)
 
-
-#  만듭니다. 츠쿠리마스.
 class createShowInfo(QWidget):
      def __init__(self, title : str, getdate:str, language: str):
           super().__init__()
