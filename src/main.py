@@ -28,26 +28,30 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.DefLayout = DefaultLayout()
         self.setCentralWidget(self.DefLayout)
+        self.windows = []
 
         self.HEIGHT = 790
         self.WIDTH = 550
-        
+        self.setWindowTitle("Shorty! - main")
         self.setFixedSize(self.WIDTH, self.HEIGHT)
 
-        # 페이지 추가
+        # main에 위치한 stack --- 여기서 인자로 넘겨줌.
         self.DefLayout.addPage(page01(self.DefLayout.stack))#home
         self.DefLayout.addPage(page04())#단어추가 페이지
-        self.DefLayout.addPage(page05())#setting
+        self.DefLayout.addPage(page05(self))#setting
         self.DefLayout.addPage(page02())#list(profile)
         self.DefLayout.addPage(page03())#단어 상세페이지
         self.DefLayout.addPage(page03_01())
 
-        # 하단 네비게이션 연결
+
+        # 네비게이션 연결
         self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
 
         self.setStyleSheet(f"""
             background-color: {BACKGROUND['main']};
         """)
+
+        self.windows.append(self)
           
     def center(self): # 화면 정가운데로 보내기
         screen = QCoreApplication.instance().primaryScreen()
@@ -66,5 +70,3 @@ if __name__ == "__main__":
     window.show()
     window.center()
     sys.exit(app.exec())
-
-# 여기서 위젯 관리 
