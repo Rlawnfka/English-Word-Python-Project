@@ -10,41 +10,19 @@ load_dotenv()
 class ConnectDB:
     def __init__(self):
 
-        # mongodb 비밀번호 가져오기
+        # env파일 안에 넣어둔 mongodb 비밀번호 가져오기
         MONGO_URL = os.getenv("MONGO_URL")
 
-        if not MONGO_URL:
-            raise ValueError("환경변수 mongo_url이 설정되지 않음")
-        
         self.client = MongoClient(MONGO_URL)
-        self.db = self.client["Titles"] # 외부에서 접근 가능 (self.db)
+        self.db = self.client["Titles"]
         
     def close(self):
         self.client.close()
 
-class WordListManager:
-    def __init__(self,db_connection):
-        self.conn = db_connection
+class Titles:
+    def __init__(self, db):
+        self.db = db
 
-    # 단어 리스트 제목들 불러오기
-    def getList(self):
-        self.titles = []
-        pass
-
-    def createList(self, title, language):
-        pass
-
-    def deleteList(self, id):
-        pass
-
-class WordManager:
-    def __init__(self,db_connection):
-        self.conn = db_connection
-
-    # 타이틀 단어들 가져오기
-    def getWords(self, id):
-        pass
-
-
-    def addWord(self, id, word):
-        pass
+    def getTitles(self):
+        return self.db.list_collection_names()
+        

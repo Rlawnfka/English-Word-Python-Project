@@ -3,7 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from datetime import datetime
 
-# from data.word_manager import connectDB
+from data.word_manager import ConnectDB
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
@@ -12,6 +12,8 @@ from defalut_setting.colors import *
 class page04(QWidget):
      def __init__(self):
           super().__init__()
+          self.db = ConnectDB().db # DB연결
+
           self.contentLayout = QVBoxLayout()
           self.setLayout(self.contentLayout)
           self.infoWidget = inputInfo()
@@ -24,22 +26,31 @@ class page04(QWidget):
           self.contentLayout.addWidget(submitButton)
      
      def allSubmit(self):
-          title = self.infoWidget.getTitle()
-          language = self.infoWidget.getLanguage()
+
+          title = self.infoWidget.getTitle().strip()
+          language = self.infoWidget.getLanguage().strip()
           wordData = self.wordListWidget.getWordList()
           
-
-          # 아직 DB 처리 안함
-          # title(제목) 으로 컬렉션 만들기
-          # collection = self.db[title] 
-          # title에 넣을 language, wordData
-          # document = {
-          #      "language" :language,
-          #      "firstDate":datetime.datetime.now(),
-          #      "wordData" :wordData
-          # }
-          # result = collection.insert_one(document)
-          # print(f"inserted document ID : {result.inserted_id}")
+          #컬렉션이름 = 제목
+          collection = self.db[title] 
+          wordDataList = []
+          for w,m,u in wordData:
+               # 각 리스트안에 있는 것들을 w,m,u으로 분리해서 딕셔너리로 변환
+               wordDataList.append({
+                    "word":w,
+                    "meaning": m,
+                    "unknown": u
+               })     
+          
+          # 컬렉션에 넣을 데이터
+          document = {
+               "language": language,
+               "firstDate": datetime.now(),
+               "lastReviewDate": datetime.now(),
+               "wordData": wordDataList
+          }
+          # 컬렉션에 데이터 하나 삽입
+          collection.insert_one(document)
 
 class inputInfo(QWidget): 
      def __init__(self):
@@ -83,8 +94,8 @@ class wordList(QWidget):
           self.layout.addWidget(row)
           self.inputIndex += 1
 
-     def saveWord(self, word, meaning):
-          self.wordList.append([word, meaning]) ##### 데이터 넣기 편한걸로..
+     def saveWord(self, word, meaning, unknown):
+          self.wordList.append([word, meaning, unknown])
           self.addInputRow()
 
      def getWordList(self):
@@ -136,4 +147,4 @@ class wordInput(QWidget):
           word = self.wordInput.text()
           meaning = self.meanInput.text()
           if word and meaning:
-               self.saveWord(word, meaning)       # wordList class에 있는 메서드
+               self.saveWord(word, meaning, True) # wordList class에 있는 메서드
