@@ -95,7 +95,7 @@ class CreateNav(QWidget):
         iconProfile = QIcon(profileIcon_path)
 
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        page = [0, 3, 1, 2]
+        page = [0, 4, 1, 2]
 
         layout = QHBoxLayout()
 
