@@ -3,15 +3,17 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from datetime import datetime
 
-from data.word_manager import connectDB as DATA
+# from data.word_manager import connectDB
 from gui.DefaultLayout import DefaultLayout
 from defalut_setting.colors import *
 
 ### NOTICE! : add page
 
-class page04(DefaultLayout):
+class page04(QWidget):
      def __init__(self):
           super().__init__()
+          self.contentLayout = QVBoxLayout()
+          self.setLayout(self.contentLayout)
           self.infoWidget = inputInfo()
           self.wordListWidget = wordList()
           self.contentLayout.addWidget(self.infoWidget) 
@@ -25,18 +27,19 @@ class page04(DefaultLayout):
           title = self.infoWidget.getTitle()
           language = self.infoWidget.getLanguage()
           wordData = self.wordListWidget.getWordList()
+          
 
-          # 여기서 DB처리
+          # 아직 DB 처리 안함
           # title(제목) 으로 컬렉션 만들기
-          collection = self.db[title] 
+          # collection = self.db[title] 
           # title에 넣을 language, wordData
-          document = {
-               "language" :language,
-               "firstDate":datetime.datetime.now(),
-               "wordData" :wordData
-          }
-          result = collection.insert_one(document)
-          print(f"inserted document ID : {result.inserted_id}")
+          # document = {
+          #      "language" :language,
+          #      "firstDate":datetime.datetime.now(),
+          #      "wordData" :wordData
+          # }
+          # result = collection.insert_one(document)
+          # print(f"inserted document ID : {result.inserted_id}")
 
 class inputInfo(QWidget): 
      def __init__(self):
@@ -45,7 +48,7 @@ class inputInfo(QWidget):
 
           self.titleInput = QLineEdit()
           self.titleInput.setPlaceholderText("title")
-          self.title.setStyleSheet("border: none; border-bottom: 1px solid gray")
+          self.titleInput.setStyleSheet("border: none; border-bottom: 1px solid gray")
 
           self.languageInput = QLineEdit()
           self.languageInput.setPlaceholderText("language")
@@ -54,12 +57,13 @@ class inputInfo(QWidget):
           layout.addWidget(self.titleInput)
           layout.setSpacing(15) 
           layout.addWidget(self.languageInput)
+          self.setLayout(layout)
 
      def getTitle(self):
-          return self.titleEdit.text()
+          return self.titleInput.text()
 
      def getLanguage(self):
-          return self.languageEdit.text()
+          return self.languageInput.text()
 
 
 # 단어 저장 관리 클래스 - return을 위함
@@ -89,24 +93,24 @@ class wordList(QWidget):
 
 # input 창 관리 클래스
 class wordInput(QWidget):
-     def __init__(self, index: int, saveWord, addInput):
+     def __init__(self, index: int, saveWord): # def __init__(self, index: int, saveWord, addInput):
           super().__init__()
           self.saveWord = saveWord
 
           self.wordInput = QLineEdit()
-          self.wordInput.setPlaceholderText = "word"
+          self.wordInput.setPlaceholderText("word")
           self.meanInput = QLineEdit()
-          self.meanInput.setPlaceholderText = "meaning"
+          self.meanInput.setPlaceholderText("meaning")
 
           # 
           enterButton = QPushButton()
           enterButton.setIcon(QIcon("../assets/icons/iconEnter.png"))
           enterButton.setIconSize(QSize(23, 16))
           enterButton.setFlat(True) #배경 없애기
-          enterButton.clicked.connect(submit)
+          enterButton.clicked.connect(self.submit)
           
-          self.wordInput.returnPressed.connect(submit)
-          self.meanInput.returnPressed.connect(submit)
+          self.wordInput.returnPressed.connect(self.submit)
+          self.meanInput.returnPressed.connect(self.submit)
 
           deleteButton = QPushButton()
           deleteButton.setIcon(QIcon("../assets/icons/iconBin.png"))
@@ -119,7 +123,7 @@ class wordInput(QWidget):
           horiz1.addWidget(QLabel(str(index)))
           horiz1.addWidget(self.wordInput)
           horiz1.addWidget(deleteButton)
-          # horiz2.addwidget(QLabel()) #간격
+          # horiz2.addWidget(QLabel()) #간격
           horiz2.addWidget(self.meanInput)
           horiz2.addWidget(enterButton)
 
@@ -128,8 +132,8 @@ class wordInput(QWidget):
           layout.addLayout(horiz2)
           self.setLayout(layout)
 
-          def submit(self):
-               word = self.wordInput.text()
-               meaning = self.meanInput.text()
-               if word and meaning:
-                    self.saveWord(word, meaning)       # wordList class에 있는 메서드
+     def submit(self):
+          word = self.wordInput.text()
+          meaning = self.meanInput.text()
+          if word and meaning:
+               self.saveWord(word, meaning)       # wordList class에 있는 메서드
