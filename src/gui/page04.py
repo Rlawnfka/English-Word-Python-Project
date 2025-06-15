@@ -10,11 +10,10 @@ from defalut_setting.colors import *
 ### NOTICE! : add page
 
 class page04(QWidget):
-     def __init__(self):
+     def __init__(self, db):
           super().__init__()
 
-          self.connectDB = ConnectDB()
-          self.db = self.connectDB.db # DB연결
+          self.db = db # DB연결
 
           self.contentLayout = QVBoxLayout()
           self.setLayout(self.contentLayout)
@@ -29,9 +28,6 @@ class page04(QWidget):
           self.contentLayout.addWidget(submitButton)
      
      def allSubmit(self):
-          
-          
-
           title = self.infoWidget.getTitle().strip()
           language = self.infoWidget.getLanguage().strip()
           wordData = self.wordListWidget.getWordList()

@@ -24,16 +24,12 @@ class ConnectDB:
             self.client = None
             self.db = None
 
-    def close(self):
-        self.client.close()
-
 class Titles:
     def __init__(self, db):
         self.db = db
 
     def getTitles(self):
-        if self.db is None:
-            self.db.list_collection_names()
+        if self.db is not None:
+            return self.db.list_collection_names()
         else:
-            print(f"DB없어요 . 빈 리스트 반환")
             return []

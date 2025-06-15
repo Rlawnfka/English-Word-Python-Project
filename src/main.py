@@ -15,6 +15,7 @@ warnings.simplefilter("always")
 
 from gui.DefaultLayout import DefaultLayout, CreateNav
 from defalut_setting.colors import *
+from data.word_manager import ConnectDB
 
 from gui.page01 import page01
 from gui.page02 import page02
@@ -26,6 +27,14 @@ from gui.page05 import page05
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        self.connect = ConnectDB()
+        self.db = self.connect.db # 여기서 한 번만 연결
+
+        def closeDB(self,event):
+            ConnectDB().client.close()
+            event.accept()
+
         self.DefLayout = DefaultLayout()
         self.setCentralWidget(self.DefLayout)
         self.windows = []
@@ -37,9 +46,9 @@ class MainWindow(QMainWindow):
 
         # main에 위치한 stack --- 여기서 인자로 넘겨줌.
         self.DefLayout.addPage(page01(self.DefLayout.stack))#home
-        self.DefLayout.addPage(page04())#단어추가 페이지
+        self.DefLayout.addPage(page04(self.db))#단어추가 페이지
         self.DefLayout.addPage(page05(self))#setting
-        self.DefLayout.addPage(page02())#list(profile)
+        self.DefLayout.addPage(page02(self.db))#list(profile)
         self.DefLayout.addPage(page03())#단어 상세페이지
         self.DefLayout.addPage(page03_01())
 
