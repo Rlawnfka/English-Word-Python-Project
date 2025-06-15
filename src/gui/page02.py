@@ -3,6 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
 from gui.DefaultLayout import DefaultLayout
+from data.word_manager import ConnectDB,Titles
 from defalut_setting.colors import *
 
 ### NOTICE! : select title
@@ -21,14 +22,23 @@ class page02(QWidget):
           scrollContent = QWidget()
           self.contentLayout = QVBoxLayout(scrollContent)
 
-          # DB에서 삽입
-          for i in range(4):
-               info = createShowInfo("unit English", "2024/05/24", "English")
-               self.contentLayout.addWidget(info)
+          # DB 연결
+          db = ConnectDB().db
+          titleList = Titles(db).getTitles()
+
+          # DB로 info 생성
+          for title in titleList:
+               collection = db[title]
+               document = collection.find_one()
+
+               if document:
+                    date = document.get("firstDate", "").strftime("%Y/%m/%d")
+                    language = document.get("language")
+                    info = createShowInfo(title, date, language)
+                    self.contentLayout.addWidget(info)
 
           # 플러스 버튼 추가
           self.contentLayout.addWidget(info.createPlusBtn())
-
 
           # 콘텐츠를 스크롤 영역에 넣기
           scroll.setWidget(scrollContent)
