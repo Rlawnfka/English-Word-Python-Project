@@ -1,19 +1,19 @@
 import sys
 from PyQt6.QtWidgets import( 
     QApplication, QMainWindow, QStackedWidget, QWidget, QHBoxLayout, QVBoxLayout,
-    QPushButton, Qsize
+    QPushButton
 )
 from PyQt6.QtGui import(
     QIcon,
 ) 
 from PyQt6.QtCore import(
-    QSize
+    QSize, QCoreApplication
 )
 
 import warnings                 # 오류 표시
 warnings.simplefilter("always")
 
-from gui.DefaultLayout import DefaultLayout
+from gui.DefaultLayout import DefaultLayout, CreateNav
 from defalut_setting.colors import *
 
 from gui.page01 import page01
@@ -25,30 +25,36 @@ from gui.page05 import page05
 
 class MainWindow(QMainWindow):
     def __init__(self):
-        super().__init__()        
-        self.setCentralWidget(DefaultLayout())
-
+        super().__init__()
         self.DefLayout = DefaultLayout()
         self.setCentralWidget(self.DefLayout)
 
-        self.setStyleSheet(f"""
-            *{{
-                background-color: {BACKGROUND['main']};
-            }}
-        """)
-        
-        self.stack = QStackedWidget()
-        self.stack.addWidget(page01())  # 홈        0
-        self.stack.addWidget(page02())  # 리스트    3
-        self.stack.addWidget(page03())  # 리스트 -> 상세
-        self.stack.addWidget(page03_01())
-        self.stack.addWidget(page04())  # 추가      1
-        self.stack.addWidget(page05())  # 세팅      2
+        # 페이지 추가
+        self.DefLayout.addPage(page01())
+        self.DefLayout.addPage(page02())
+        self.DefLayout.addPage(page03())
+        self.DefLayout.addPage(page03_01())
+        self.DefLayout.addPage(page04())
+        self.DefLayout.addPage(page05())
 
-        self.layout.setContnet(self.stack)
-        self.layout.setNav(self.createNav())
+        # 하단 네비게이션 연결
+        self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
+
+        # self.layout = self.DefLayout
+        # self.layout.setContent(self.stack) # DafaultLayout 클래스에 setContent 메서드 없음
+        # self.layout.setNav(self.createNav()) # DafaultLayout 클래스에 setNav 메서드 없음
     
-    def createNav(self):
+    
+    def center(self): # 화면 정가운데로 보내기
+        screen = QCoreApplication.instance().primaryScreen()
+        rect = screen.availableGeometry()
+        center_point = rect.center()
+        frame_geom = self.frameGeometry()
+        frame_geom.moveCenter(center_point)
+        self.move(frame_geom.topLeft())
+
+
+    def CreateNav(self, stack):
         nav = QWidget()
         layout = QHBoxLayout()
         
@@ -75,7 +81,7 @@ class MainWindow(QMainWindow):
                 }}
             """)
 
-            btn.clicked.connect(lambda _, i=i: self.stack.setCurrentIndex(i))
+            btn.clicked.connect(lambda _, i=i: stack.setCurrentIndex(i))
             layout.addWidget(btn)
 
         nav.setLayout(layout)
@@ -88,6 +94,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
+    window.center()
     sys.exit(app.exec())
 
 # 여기서 위젯 관리 
