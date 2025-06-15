@@ -30,15 +30,19 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.DefLayout)
 
         # 페이지 추가
-        self.DefLayout.addPage(page01())
-        self.DefLayout.addPage(page02())
-        self.DefLayout.addPage(page03())
+        self.DefLayout.addPage(page01(self.DefLayout.stack))#home
+        self.DefLayout.addPage(page04())#단어추가 페이지
+        self.DefLayout.addPage(page05())#setting
+        self.DefLayout.addPage(page02())#list(profile)
+        self.DefLayout.addPage(page03())#단어 상세페이지
         self.DefLayout.addPage(page03_01())
-        self.DefLayout.addPage(page04())
-        self.DefLayout.addPage(page05())
 
         # 하단 네비게이션 연결
         self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
+
+        self.setStyleSheet(f"""
+            background-color: {BACKGROUND['main']};
+        """)
           
     def center(self): # 화면 정가운데로 보내기
         screen = QCoreApplication.instance().primaryScreen()
@@ -49,14 +53,14 @@ class MainWindow(QMainWindow):
         self.move(frame_geom.topLeft())
 
 
-    def CreateNav(self, stack):
-        nav = QWidget()
-        layout = QHBoxLayout()
+    # def CreateNav(self, stack):
+    #     nav = QWidget()
+    #     layout = QHBoxLayout()
         
-        iconHome = QIcon("../assets/icons/iconHome.svg")
-        iconAdd = QIcon("../assets/icons/iconAdd.svg")
-        iconSetting = QIcon("../assets/icons/iconSetting.svg")
-        iconProfile = QIcon("../assets/icons/iconProfile.svg")
+    #     iconHome = QIcon("../assets/icons/iconHome.svg")
+    #     iconAdd = QIcon("../assets/icons/iconAdd.svg")
+    #     iconSetting = QIcon("../assets/icons/iconSetting.svg")
+    #     iconProfile = QIcon("../assets/icons/iconProfile.svg")
         
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
         pages = [0, 4, 1, 2]
@@ -75,12 +79,29 @@ class MainWindow(QMainWindow):
                     color: {COLOR['hover']};
                 }}
             """)
+    #     iconList = [iconHome, iconAdd, iconSetting, iconProfile]
+    #     pages = [0, 3, 1, 2]
+    #     for i, icon in enumerate(iconList):
+    #         btn = QPushButton()
+    #         btn.setIcon(icon)
+    #         btn.setIconSize(QSize(35, 35))
+    #         btn.setFlat(True)
+    #         btn.setCheckable(True)
+    #         btn.setStyleSheet(f"""
+    #             QPushButton{{
+    #                 color: {TEXT['primary']};
+    #                 background-color : transparent;
+    #             }}
+    #             QPushButton:hover{{
+    #                 color: {COLOR['hover']};
+    #             }}
+    #         """)
 
-            btn.clicked.connect(lambda _, i=i: stack.setCurrentIndex(i))
-            layout.addWidget(btn)
+    #         btn.clicked.connect(lambda _, i=i: stack.setCurrentIndex(i))
+    #         layout.addWidget(btn)
 
-        nav.setLayout(layout)
-        return nav
+    #     nav.setLayout(layout)
+    #     return nav
 
 
 

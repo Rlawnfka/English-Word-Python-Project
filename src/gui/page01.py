@@ -13,13 +13,13 @@ from defalut_setting.colors import *
 '''
 
 class page01(QWidget):
-     def __init__(self):
+     def __init__(self, stack: QStackedLayout):
           super().__init__()
           self.contentLayout = QVBoxLayout()
           self.setLayout(self.contentLayout)
           
           self.contentLayout.addWidget(setTopSentanse())
-          self.contentLayout.addWidget(setStartButton())
+          self.contentLayout.addWidget(setStartButton(stack))
           self.contentLayout.addWidget(setCategories())
           self.contentLayout.addWidget(setQuizBox())
 
@@ -37,17 +37,20 @@ class setTopSentanse(QWidget):
           layout = QVBoxLayout()
           layout.addWidget(sentanse)
 
+          self.setStyleSheet(f"""
+               color: {TEXT['primary']};
+          """)
           self.setLayout(layout)
 
 
 
 class setStartButton(QWidget):
-     def __init__(self):
+     def __init__(self, stack: QStackedLayout):
           super().__init__()
           startButton = QPushButton("START STUDY!")
           startButton.setFixedHeight(60)
           startButton.setFixedWidth(250)
-          # startButton.setFixedSize(60, 250)
+          startButton.clicked.connect(lambda: stack.setCurrentIndex(3))
 
           startButton.setStyleSheet(f"""
                QPushButton{{
@@ -85,6 +88,8 @@ class setCategories(QWidget):
                else:
                     currentTitle = title
                button = QPushButton(currentTitle)
+          # DB 탐색으로 넣어야함
+
                button.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
                button.setStyleSheet(f"""
                     QPushButton{{
@@ -92,6 +97,7 @@ class setCategories(QWidget):
                          border-radius: 10px;
                          background-color:{COLOR['secondary']};
                          color: {TEXT['secondary']};
+                         padding: 10px;
                     }}
                     QPushButton:hover{{
                          background-color: {COLOR['nav']};
