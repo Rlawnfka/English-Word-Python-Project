@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         # main에 위치한 stack --- 여기서 인자로 넘겨줌.
         self.DefLayout.addPage(page01(self.DefLayout.stack))#home
         self.DefLayout.addPage(page04(self.db))#단어추가 페이지
-        self.DefLayout.addPage(page05(self))#setting
+        self.DefLayout.addPage(page05(self, self.db))#setting
         self.DefLayout.addPage(page02(self.db))#list(profile)
         self.DefLayout.addPage(page03())#단어 상세페이지
         self.DefLayout.addPage(page03_01())
