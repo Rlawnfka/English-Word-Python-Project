@@ -67,7 +67,7 @@ class CreateLogo(QWidget):
         logo = QLabel("Shorty!", self)
         logo.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
-        font = QFont("Tilt Warp", 32, QFont.Weight.Normal)
+        font = QFont("Tilt Warp", 32, QFont.Weight.Bold)
         logo.setFont(font)
 
         logo.setStyleSheet("""
@@ -105,7 +105,7 @@ class CreateNav(QWidget):
             button.setIconSize(QSize(35, 35))
             button.setFlat(True)
             button.setCheckable(True)
-            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(page[index]))
+            button.clicked.connect(lambda _, index=i: self.stack.setCurrentIndex(index))
             button.setStyleSheet(f"""
                 QPushButton{{
                     color: {TEXT['primary']};

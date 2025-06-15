@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         self.DefLayout.setNav(CreateNav(self.DefLayout.stack))
 
         self.setStyleSheet(f"""
-            background-color: {BACKGROUND['primary']}
+            background-color: {BACKGROUND['main']};
         """)
           
     def center(self): # 화면 정가운데로 보내기

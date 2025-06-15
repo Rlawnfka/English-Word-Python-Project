@@ -37,6 +37,9 @@ class setTopSentanse(QWidget):
           layout = QVBoxLayout()
           layout.addWidget(sentanse)
 
+          self.setStyleSheet(f"""
+               color: {TEXT['primary']};
+          """)
           self.setLayout(layout)
 
 
