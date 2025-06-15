@@ -72,6 +72,7 @@ class inputInfo(QWidget):
           layout.addWidget(self.languageInput)
           self.setLayout(layout)
 
+     # 추후 DB처리, 혹은 조회? 
      def getTitle(self):
           return self.titleInput.text()
 

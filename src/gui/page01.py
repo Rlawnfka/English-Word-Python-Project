@@ -28,7 +28,6 @@ class setTopSentanse(QWidget):
           super().__init__()
      
           # temp의 문장을 DB에서 추출
-          # 랜덤으로 바뀜
           temp = "안녕하세요! Shorty입니다 😊\n단어, 짧은 복습 어떠신가요?"
           sentanse = QLabel(temp)
           sentanse.setFont(QFont("Do Hyeon", 25, QFont.Weight.Normal))
