@@ -116,19 +116,16 @@ class createWordWindow(QWidget):
      def __init__(self, word_list, interval_ms=3000, color="#ffffff", stay_on_top=True):
           super().__init__()
         
-<<<<<<< HEAD
           self.word_list = word_list if word_list else ["(단어 없음)"]
           self.index = 0
           self.setStyleSheet(f"background-color: {color}; font-size: 24px;")
           self.label = QLabel(self.word_list[self.index], self)
           self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-=======
-        self.word_list = word_list if word_list else ["단어 없다"]
-        self.index = 0
-        self.setStyleSheet(f"background-color: {color}; font-size: 24px;")
-        self.label = QLabel(self.word_list[self.index], self)
-        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
->>>>>>> 6d47cc1619a9c0afc3646871f1b7454dfb58fd25
+          self.word_list = word_list if word_list else ["단어 없다"]
+          self.index = 0
+          self.setStyleSheet(f"background-color: {color}; font-size: 24px;")
+          self.label = QLabel(self.word_list[self.index], self)
+          self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
           layout = QVBoxLayout()
           layout.addWidget(self.label)
