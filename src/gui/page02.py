@@ -7,9 +7,11 @@ from defalut_setting.colors import *
 
 ### NOTICE! : select title
 
-class page02(DefaultLayout):
+class page02(QWidget):
      def __init__(self):
           super().__init__()
+          self.contentLayout = QVBoxLayout()
+          self.setLayout(self.contentLayout)
 
           # DB에서 삽입
           for i in range(4):
@@ -26,14 +28,14 @@ class createShowInfo(QWidget):
           titleLabel.setFont(QFont("Pretandard", 14, QFont.Weight.Bold))
 
           dateLabel = QLabel(getdate)
-          languageLable = QLabel(language)
+          languageLabel = QLabel(language)
 
           bookLabel = QLabel("../assets/icons/iconBook.png")
 
           # 날짜 + 언어 
           textGrayBottom = QHBoxLayout()
           textGrayBottom.addWidget(dateLabel)
-          textGrayBottom.addWidget(languageLable)
+          textGrayBottom.addWidget(languageLabel)
 
           # title + (날짜 + 언어)
           textLayout = QVBoxLayout()
@@ -45,11 +47,13 @@ class createShowInfo(QWidget):
           layout.addLayout(textLayout)
           layout.addStretch()
 
+          self.setLayout(layout)
+
           
 
-     def createPlusBtn() -> QWidget:
+     def createPlusBtn(self) -> QWidget:
           rtnWidget = QWidget()
-          layout = QBoxLayout()
+          layout = QVBoxLayout()
           plusButton = QPushButton("+")
           plusButton .setFixedSize(60,60)
           plusButton.setStyleSheet(f"""
