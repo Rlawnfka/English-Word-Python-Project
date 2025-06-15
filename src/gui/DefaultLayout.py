@@ -89,13 +89,13 @@ class CreateNav(QWidget):
         addIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconAdd.svg")
         settingIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconSetting.svg")
         profileIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconProfile.svg")
+
         iconHome = QIcon(homeIcon_path)
         iconAdd = QIcon(addIcon_path)
         iconSetting = QIcon(settingIcon_path)
         iconProfile = QIcon(profileIcon_path)
 
         iconList = [iconHome, iconAdd, iconSetting, iconProfile]
-        page = [0, 3, 1, 2]
 
         layout = QHBoxLayout()
 
