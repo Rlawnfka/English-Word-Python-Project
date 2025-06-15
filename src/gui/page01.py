@@ -9,7 +9,6 @@ from defalut_setting.colors import *
 '''
  NOTICE! : home, main page
 ### TODO : quixBox에 클릭된 버튼 정답 확인 로직
-
 '''
 
 class page01(QWidget):
@@ -29,7 +28,6 @@ class setTopSentanse(QWidget):
           super().__init__()
      
           # temp의 문장을 DB에서 추출
-          # 랜덤으로 바뀜
           temp = "안녕하세요! Shorty입니다 😊\n단어, 짧은 복습 어떠신가요?"
           sentanse = QLabel(temp)
           sentanse.setFont(QFont("Do Hyeon", 25, QFont.Weight.Normal))
@@ -39,7 +37,7 @@ class setTopSentanse(QWidget):
 
           self.setStyleSheet(f"""
                color: {TEXT['primary']};
-               
+
           """)
           self.setLayout(layout)
 
@@ -65,7 +63,6 @@ class setStartButton(QWidget):
                }}               
           """)
           # 페이지 만든 후 버튼 연결
-          # startButton.clicked.connect(fn)
           layout = QVBoxLayout()
           layout.addWidget(startButton, alignment=Qt.AlignmentFlag.AlignLeft)
           self.setLayout(layout)
