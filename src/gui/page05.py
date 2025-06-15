@@ -6,6 +6,6 @@ from gui.DefaultLayout import DefaultLayout
 
 ### NOTICE! : setting & 새 외부창 생성
 
-class page05(DefaultLayout):
+class page05(QWidget):
      def __init__(self):
           super().__init__()
