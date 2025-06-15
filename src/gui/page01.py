@@ -12,9 +12,12 @@ from defalut_setting.colors import *
 
 '''
 
-class page01(DefaultLayout):
+class page01(QWidget):
      def __init__(self):
           super().__init__()
+          self.contentLayout = QVBoxLayout()
+          self.setLayout(self.contentLayout)
+          
           self.contentLayout.addWidget(setTopSentanse())
           self.contentLayout.addWidget(setStartButton())
           self.contentLayout.addWidget(setCategories())
@@ -41,7 +44,7 @@ class setTopSentanse(QWidget):
 class setStartButton(QWidget):
      def __init__(self):
           super().__init__()
-          startButton = QPushButton("START")
+          startButton = QPushButton("START STUDY!")
           startButton.setFixedHeight(60)
           startButton.setFixedWidth(250)
           # startButton.setFixedSize(60, 250)
@@ -51,7 +54,8 @@ class setStartButton(QWidget):
                     background-color: {COLOR['primary']};
                     color: white;
                     font-size: 25px;                
-                    border-radius: 15px;                    
+                    border-radius: 15px;   
+                    font-weight: bold;                 
                }}
                QPushButton:hover {{
                     background-color: {COLOR['secondary']};
@@ -60,7 +64,7 @@ class setStartButton(QWidget):
           # 페이지 만든 후 버튼 연결
           # startButton.clicked.connect(fn)
           layout = QVBoxLayout()
-          layout.addWidget(startButton, alignment=Qt.AlignmentFlag.AlignCenter)
+          layout.addWidget(startButton, alignment=Qt.AlignmentFlag.AlignLeft)
           self.setLayout(layout)
 
 
@@ -72,7 +76,7 @@ class setCategories(QWidget):
           # 현재 배열은 임시
           recentTitle = ["토익 단어장", "수능 필수 어휘2", "영어회화 학원 정리1 5월 29일"]
           
-          layout = QVBoxLayout()
+          layout = QHBoxLayout()
           
           for title in recentTitle:
                # 조건 : 긴 문자열 처리, 12문자 이상은 잘라버림 
@@ -84,7 +88,7 @@ class setCategories(QWidget):
                button.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
                button.setStyleSheet(f"""
                     QPushButton{{
-                         font-size: 15px;
+                         font-size: 17px;
                          border-radius: 10px;
                          background-color:{COLOR['secondary']};
                          color: {TEXT['secondary']};
@@ -108,7 +112,11 @@ class setQuizBox(QWidget):
 
           quizTitle = QLabel("복습 퀴즈 ✅")
           quizTitle.setStyleSheet("font-size: 17px;")
+          quizTitle.setStyleSheet(f"""
+               background-color: {BACKGROUND['main']};      
+          """)
           quizTitle.setFont(QFont("Do Hyeon", 25, QFont.Weight.Normal))
+          layout.addWidget(quizTitle)
           
           # DB에서 랜덤으로 뽑아오기
           currentWord = "temporal"
