@@ -8,27 +8,75 @@ from defalut_setting.colors import *
 
 from data.word_manager import *
 
+import os
 ### NOTICE! : wordList 상세 페이지 & word 복습
 
-class page03(DefaultLayout):
+class page03(QWidget):
      def __init__(self):
           super().__init__()
-          self.contentLayout.addWidget(topWidget())
-          self.contentLayout.addWidget(unknownWordButtons())
+          self.contentLayout = QVBoxLayout()
+          self.contentLayout.addWidget(cardContainer())
+          self.setLayout(self.contentLayout)
+
+class cardContainer(QWidget):
+     def __init__(self, words=None):
+          super().__init__()
+
+          outerLayout = QVBoxLayout()
+          outerLayout.setContentsMargins(20,20,20,20)
+
+          container = QWidget()
+          container.setStyleSheet(f"""
+            background-color: {COLOR['secondary']};
+            border-radius: 20px;
+          """)
+          
+          innerLayout = QVBoxLayout()
+          innerLayout.setSpacing(15)
+          innerLayout.setContentsMargins(20,20,20,20)
+
+          innerLayout.addWidget(topWidget())
+          innerLayout.addWidget(unknownWordButtons())
+          innerLayout.addWidget(reviewProgressInfo())
+
+          if words is None:
+               words = ["apple", "banana", "cherry", "date","apple", "banana", "cherry", "date","apple"]
+               # TODO : wordList 안늘어나는 문제 해결하기
+
+          innerLayout.addWidget(WordLabels(words))
+
+          container.setLayout(innerLayout)
+          
+          outerLayout.addWidget(container)
+
+          self.setLayout(outerLayout)
 
 class showTitleInfo(QWidget):
      def __init__(self, title: str, getdate: str, language: str):
           super().__init__()
 
           titleLabel = QLabel(title)
-          titleLabel.setFont(QFont("Pretandard", 30, QFont.Weight.Bold))
+          titleLabel.setFont(QFont("Pretandard", 22, QFont.Weight.Bold))
 
           dateLabel = QLabel(getdate)
           languageLabel = QLabel(" · "+language)
-          dateLabel.setFont(QFont("Pretandard", 17, QFont.Weight.Normal))
-          languageLabel.setFont(QFont("Pretandard", 17, QFont.Weight.Normal))
+          dateLabel.setFont(QFont("Pretandard", 14))
+          languageLabel.setFont(QFont("Pretandard", 14))
 
           textGrayBottom = QHBoxLayout()
+          DateStyle = f"""
+          QLabel {{
+               color:gray;
+               }}
+          """
+          LanguageStyle = f"""
+          QLabel {{
+               color:gray;
+               margin-right:14px;
+               }}
+          """
+          dateLabel.setStyleSheet(DateStyle)
+          languageLabel.setStyleSheet(LanguageStyle)
           textGrayBottom.addWidget(dateLabel)
           textGrayBottom.addWidget(languageLabel)
 
@@ -44,7 +92,8 @@ class editRemoveButtons(QWidget):
 
           # 수정 버튼
           editButton = QPushButton() 
-          editButton.setIcon(QIcon("/src/assets/icons/editIcon.png"))
+          editIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/editIcon.png")
+          editButton.setIcon(QIcon(editIcon_path))
           editButton.setIconSize(QSize(32,32)) 
           # 창이 늘어나도 크기 변하지 않음
           editButton.setFixedSize(32,32) 
@@ -53,7 +102,8 @@ class editRemoveButtons(QWidget):
 
           # 삭제 버튼
           binButton = QPushButton() 
-          binButton.setIcon(QIcon("/src/assets/icons/iconBin.png"))
+          binIcon_path = os.path.join(os.path.dirname(__file__), "../assets/icons/iconBin.png")
+          binButton.setIcon(QIcon(binIcon_path))
           binButton.setIconSize(QSize(32,32))
           binButton.setFixedSize(32,32)
           binButton.clicked.connect(lambda:None)
@@ -70,7 +120,7 @@ class topWidget(QWidget):
           super().__init__()
 
           # 왼쪽 / 제목 + 날짜 + 언어
-          titleInfo = showTitleInfo(DATA.getTitle, DATA.getDate, DATA.getLanguage)
+          titleInfo = showTitleInfo("Sample Title", "2025/06/14", "English")
 
           # 오른쪽 / 수정 버튼, 삭제 버튼
           modifyButtons = editRemoveButtons()
@@ -79,7 +129,7 @@ class topWidget(QWidget):
           topLayout = QHBoxLayout()
           topLayout.addWidget(titleInfo) # 왼쪽에 제목 
           topLayout.addStretch() # 가운데 공간 밀기
-          topLayout.addWidget(modifyButtons)  # 오른쪽에 버튼
+          topLayout.addWidget(modifyButtons, alignment=Qt.AlignmentFlag.AlignTop)  # 오른쪽에 버튼
 
           self.setLayout(topLayout)
      
@@ -94,7 +144,8 @@ class unknownWordButtons(QWidget):
                color:white;
                border:none;
                border-radius:12px;
-               padding:8px 24px;
+               min-width:80px;
+               min-height:32px;
                font-size:16px;
                font-weight:bold;
                }}
@@ -125,16 +176,21 @@ class unknownWordButtons(QWidget):
           # DB에 lastReviewed 저장하는 코드 작성
           # lastreviewDate 바뀌어야 함
 
-class lastReviewClass(QWidget):
+class LastReview(QWidget):
      def __init__(self):
           super().__init__()
-          
+          grayText = f""" 
+               QLabel{{
+               color:gray;
+               }}
+          """
           # last-review label
           lastViewLabel = QLabel("last-review")
-          lastViewLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          lastViewLabel.setFont(QFont("Pretandard", 14))
+          lastViewLabel.setStyleSheet(grayText)
           # last-review date
-          self.lastViewDate = QLabel() # last-review 날짜 넣어야함
-          self.lastViewDate.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          self.lastViewDate = QLabel("2025/6/15") # last-review 날짜 넣어야함
+          self.lastViewDate.setFont(QFont("Pretandard", 17))
           # 세로 정렬
           lastLayout = QVBoxLayout()
           lastLayout.addWidget(lastViewLabel)
@@ -142,16 +198,21 @@ class lastReviewClass(QWidget):
 
           self.setLayout(lastLayout)
 
-class ReviewedClass(QWidget):
+class Reviewed(QWidget):
      def __init__(self):
           super().__init__()
-
+          grayText = f""" 
+               QLabel{{
+               color:gray;
+               }}
+          """
           # reviewed label
           reviewedLabel = QLabel("reviewed")
-          reviewedLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          reviewedLabel.setFont(QFont("Pretandard", 14))
+          reviewedLabel.setStyleSheet(grayText)
           # reviewed number
-          self.reviewedNumber = QLabel() # reviewed 날짜 넣어야함
-          self.reviewedNumber.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          self.reviewedNumber = QLabel("2025/6/15") # reviewed 날짜 넣어야함
+          self.reviewedNumber.setFont(QFont("Pretandard", 17))
           # 세로 정렬
           reviewedLayout = QVBoxLayout()
           reviewedLayout.addWidget(reviewedLabel)
@@ -159,16 +220,21 @@ class ReviewedClass(QWidget):
 
           self.setLayout(reviewedLayout)
 
-class ProgressClass(QWidget):
+class Progress(QWidget):
      def __init__(self):
           super().__init__()
-
+          grayText = f""" 
+               QLabel{{
+               color:gray;
+               }}
+          """
           # progress label
           progressLabel = QLabel("progress")
-          progressLabel.setFont(QFont("Pretandard", 15, QFont.Weight.Normal))
+          progressLabel.setFont(QFont("Pretandard", 14,))
+          progressLabel.setStyleSheet(grayText)
           # progress
-          self.progressValue = QLabel() # 계산해서 넣어야함
-          self.progressValue.setFont(QFont("Pretandard", 20, QFont.Weight.Normal))
+          self.progressValue = QLabel("10/35") # 계산해서 넣어야함
+          self.progressValue.setFont(QFont("Pretandard", 17))
           # 세로 정렬
           progressLayout = QVBoxLayout()
           progressLayout.addWidget(progressLabel)
@@ -181,9 +247,9 @@ class reviewProgressInfo(QWidget):
      def __init__(self):
           super().__init__()
 
-          lastReview = lastReviewClass()
-          reviewed = ReviewedClass()
-          progress = ProgressClass()
+          lastReview = LastReview()
+          reviewed = Reviewed()
+          progress = Progress()
 
           reviewProgress = QHBoxLayout()
           reviewProgress.addWidget(lastReview)  
@@ -194,8 +260,31 @@ class reviewProgressInfo(QWidget):
 
           self.setLayout(reviewProgress)
 
-class WordLabels(QLabel):
-     def __init__(self):
+class WordLabels(QWidget):
+     def __init__(self, words=None):
           super().__init__()
-
           # 단어 카드들 구현
+         
+          labelStyle = f"""
+          QLabel {{
+               background-color:white;
+               border-radius: 8px;
+               border: none;
+               padding: 8px;
+               font-size:16px;
+               min-width: 100px;
+               min-height:40px;
+          }}
+          """
+          grid = QGridLayout()
+          grid.setSpacing(10)
+
+          for index, word in enumerate(words):
+               label = QLabel(word)
+               label.setStyleSheet(labelStyle)
+               row = index // 2
+               col = index % 2
+               grid.addWidget(label, row, col)
+          self.setLayout(grid)
+
+
